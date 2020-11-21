@@ -13,9 +13,18 @@ import java.util.List;
  * @author 
  */
 public class Planificador extends Usuario{
-    //private List<Evento> evento = new ArrayList<>(); 
+    //private List<Evento> evento;
     public void consultarSolicitudes(){}
-    public void registrarEvento(){}
-    public void confirmarEvento(){}
-    public void consultarEvento(){}
+    public void registrarEvento(){
+    System.out.println("/**********************REGISTRO DE EVENTOS******"
+                + "****************/\n/*\t\t\t\t\t\t\t\t\t\b\b*/\n/****************"
+                + "*******************************************/");}
+    public void confirmarEvento(){
+    System.out.println("/**********************CONFIRMAR EVENTO******"
+                + "****************/\n/*\t\t\t\t\t\t\t\t\t\b\b*/\n/****************"
+                + "*******************************************/");}
+    public void consultarEvento(){
+    System.out.println("/**********************CONSULTAR EVENTOS******"
+                + "****************/\n/*\t\t\t\t\t\t\t\t\t\b\b*/\n/****************"
+                + "*******************************************/");}
 }

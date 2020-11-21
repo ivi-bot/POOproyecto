@@ -18,7 +18,17 @@ public class Cliente extends Usuario {
         return true;
     }
     
-    public void crearSolicitud(){}
-    public void RegistrarPago(){}
+    public void crearSolicitud(){
+           System.out.println("/**********************NUEVA SOLICITUD******"
+                + "****************/\n/*\t\t\t\t\t\t\t\t\t\b\b*/\n/****************"
+                + "*******************************************/");
+           super.mostrarInformacion();
+        System.out.print("TIPO DE EVENTO (Elija)\n1. Boda\n2.Fiesta Infantil\n3.Fiesta Empresarial\nSeleccione: ");
+    }
+    public void RegistrarPago(){
+    System.out.println("/**********************REGISTRO PAGO******"
+                + "****************/\n/*\t\t\t\t\t\t\t\t\t\b\b*/\n/****************"
+                + "*******************************************/");
+    }
 
 }

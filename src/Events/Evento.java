@@ -17,6 +17,19 @@ public class Evento {
     protected int numeroPersonas;
     protected int elementosAdicionales;
 
+    public Evento(int ID, Evento tipo, Date fecha, Planificador planificador, Cliente cliente, double precioBase, Estado estado, Date duracion, int numeroPersonas, int elementosAdicionales) {
+        this.ID = ID;
+        this.tipo = tipo;
+        this.fecha = fecha;
+        this.planificador = planificador;
+        this.cliente = cliente;
+        this.precioBase = precioBase;
+        this.estado = estado;
+        this.duracion = duracion;
+        this.numeroPersonas = numeroPersonas;
+        this.elementosAdicionales = elementosAdicionales;
+    }
+
     public int getID() {
         return ID;
     }

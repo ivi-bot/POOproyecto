@@ -7,8 +7,18 @@ package EventProclass;
 
 /**
  *
- * @author Pedro Muñoz
+ * @author
  */
-public class Cliente {
+public class Cliente extends Usuario {
+
+    private String telefono;
+    private String correo;
+
+    private boolean validarTiempo() {
+        return true;
+    }
     
+    public void crearSolicitud(){}
+    public void RegistrarPago(){}
+
 }

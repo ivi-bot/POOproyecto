@@ -5,10 +5,17 @@
  */
 package EventProclass;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
- * @author Pedro Muñoz
+ * @author 
  */
-public class Planificador {
-    
+public class Planificador extends Usuario{
+    //private List<Evento> evento = new ArrayList<>(); 
+    public void consultarSolicitudes(){}
+    public void registrarEvento(){}
+    public void confirmarEvento(){}
+    public void consultarEvento(){}
 }

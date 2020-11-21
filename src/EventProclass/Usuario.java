@@ -7,8 +7,14 @@ package EventProclass;
 
 /**
  *
- * @author Pedro Muñoz
+ * @author 
  */
 public class Usuario {
+    protected String nombre;
+    protected String apellido;
+    protected String nomUsuario;
+    protected String contraseña;
+    protected char tipo;
     
+    public void mostrarInformacion(){} 
 }

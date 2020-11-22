@@ -9,19 +9,6 @@ public class Opcional {
     private double valor;
     private Adicional tipo;
 
-    public static void main(String[] args){
-        ArrayList<Integer> opsL = new ArrayList<>();
-        opsL.add(1);
-        opsL.add(2);
-        int i = 3;
-        if(opsL.contains(i)){
-            System.out.println("No Puede Elegir Esta Opcion De Nuevo");
-        }else{
-            System.out.println("Desea Llevar? ");
-        }
-
-    }
-
     public void verificarTipo(){
         Scanner sc = new Scanner(System.in);
         double total = 0.00;
@@ -101,12 +88,6 @@ public class Opcional {
             System.out.println("Desea registrar elementos adicionales (S/N)?");
             op = sc.nextLine().strip();
         }
-
-
-
-
-
-
         sc.close();
     }
 

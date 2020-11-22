@@ -16,7 +16,6 @@ import java.util.Scanner;
  * @author
  */
 public class Sistema {
-
     //private List<usuarios>;
     
     public static void main(String[] args) {

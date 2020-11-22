@@ -5,7 +5,10 @@
  */
 package Main;
 
+import EventProclass.Archivo;
 import EventProclass.Usuario;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -25,14 +28,11 @@ public class Sistema {
         usuario.setNomUsuario(sc.nextLine());
         System.out.print("CONTRASEÑA: ");
         usuario.setContraseña(sc.nextLine());
-        
-    mostrarMenu();
-    
+        mostrarMenu();
 
         //VERIFICAR CUANDO YA ESTE EL ARCHIVO SI ES CLIENTE C O P
         //ALMACENAR EL TIPO EN ALGUN LADO y DEMAS DATOS DEL ARCHIVO
-      
-        
+
     }
 
     public void iniciarSeccion() {
@@ -43,4 +43,6 @@ public class Sistema {
 System.out.println("1. Solicitar planificación de evento\n2. Registrar pago Evento\n3. Salir");
 System.out.println("1. Consultar solicitudes pendientes.\n 2. Registrar Evento.\n3. Confirmar Evento.\n4. Consultar Evento\n5. Salir");
     }
+
+
 }

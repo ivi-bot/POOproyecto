@@ -8,7 +8,7 @@ public class Factura {
     private int codigoPago;
     private int codigoEvento;
     private double totalPagar;
-    private Estado estado;
+    private final Estado estado;
     private int codigoTransaccion;
     private Date fechaRegistro;
 
@@ -60,4 +60,9 @@ public class Factura {
     public void setFechaRegistro(Date fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
+
+    public Estado getEstado() {
+        return estado;
+    }
+
 }

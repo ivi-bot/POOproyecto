@@ -59,5 +59,12 @@ public class Usuario {
         this.tipo = tipo;
     }
 
+
+
+    @Override
+    public String toString() {
+        return  nombre + ";"+ apellido + ";" + nomUsuario + ";" + contraseña + ";" + tipo ;
+    }
+
     
 }

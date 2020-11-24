@@ -9,15 +9,59 @@ public class Opcional {
     private double valor;
     private Adicional tipo;
 
+    public Opcional(double precio, int cantidad, Adicional tipo) {
+        this.precio = precio;
+        this.cantidad = cantidad;
+        this.tipo = tipo;
+        this.valor = this.cantidad * this.precio;
+    }
+
+    public Opcional(double precio, Adicional tio) {
+        this.valor = this.precio;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+
+    public Adicional getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(Adicional tipo) {
+        this.tipo = tipo;
+    }
+
+    /*
     public void verificarTipo(){
         Scanner sc = new Scanner(System.in);
         double total = 0.00;
         int ops;
         String op = "S";
-        while(op.equals("S")){
-            System.out.println("/***** REGISTRO DE ELEMENTOS ADICONALES PARA EL EVENTO *****/ \nLas opciones son: \n1. Comida\n" +
-                    "2. Bocaditos \n3. Musica \n4. Fotografia \n5. Bebida \n6. Regresar al menu anterior" );
-            ops = sc.nextInt();
+        while(op.equals("S")){*/
+    //System.out.println("/***** REGISTRO DE ELEMENTOS ADICONALES PARA EL EVENTO *****/ \nLas opciones son: \n1. Comida\n" +
+    //"2. Bocaditos \n3. Musica \n4. Fotografia \n5. Bebida \n6. Regresar al menu anterior" );
+            /*ops = sc.nextInt();
             switch (ops){
                 case 1:
                     //Comida
@@ -88,7 +132,5 @@ public class Opcional {
             System.out.println("Desea registrar elementos adicionales (S/N)?");
             op = sc.nextLine().strip();
         }
-        sc.close();
-    }
-
+        sc.close();*/
 }

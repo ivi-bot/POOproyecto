@@ -8,7 +8,7 @@ public class Factura {
     private int codigoPago;
     private int codigoEvento;
     private double totalPagar;
-    private final Estado estado;
+    private Estado estado = Estado.PENDIENTE;
     private int codigoTransaccion;
     private Date fechaRegistro;
 

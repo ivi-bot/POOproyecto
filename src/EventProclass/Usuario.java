@@ -5,6 +5,8 @@
  */
 package EventProclass;
 
+import java.util.Scanner;
+
 /**
  *
  * @author 
@@ -15,7 +17,8 @@ public class Usuario {
     protected String nomUsuario;
     protected String contraseña;
     protected char tipo;
-    
+    protected Scanner sc;
+    protected String opcion_usuario; 
     public void mostrarInformacion(){
         System.out.println("Bienvenid@ "+this.nombre+" "+this.apellido+"\n");} 
 

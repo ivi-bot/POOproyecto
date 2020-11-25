@@ -5,12 +5,12 @@ import Events.Estado;
 import java.util.Date;
 
 public class Factura {
-    private int codigoPago;
-    private int codigoEvento;
-    private double totalPagar;
+    private final int codigoPago;
+    private final int codigoEvento;
+    private final double totalPagar;
     private Estado estado = Estado.PENDIENTE;
-    private int codigoTransaccion;
-    private Date fechaRegistro;
+    private final int codigoTransaccion;
+    private final Date fechaRegistro;
 
     public Factura(int codigoPago, int codigoEvento, double totalPagar, Estado estado, int codigoTransaccion, Date fechaRegistro) {
         this.codigoPago = codigoPago;
@@ -25,44 +25,28 @@ public class Factura {
         return codigoPago;
     }
 
-    public void setCodigoPago(int codigoPago) {
-        this.codigoPago = codigoPago;
-    }
-
     public int getCodigoEvento() {
         return codigoEvento;
-    }
-
-    public void setCodigoEvento(int codigoEvento) {
-        this.codigoEvento = codigoEvento;
     }
 
     public double getTotalPagar() {
         return totalPagar;
     }
 
-    public void setTotalPagar(double totalPagar) {
-        this.totalPagar = totalPagar;
-    }
-
     public int getCodigoTransaccion() {
         return codigoTransaccion;
-    }
-
-    public void setCodigoTransaccion(int codigoTransaccion) {
-        this.codigoTransaccion = codigoTransaccion;
     }
 
     public Date getFechaRegistro() {
         return fechaRegistro;
     }
 
-    public void setFechaRegistro(Date fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
-    }
-
     public Estado getEstado() {
         return estado;
+    }
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
     }
 
 }

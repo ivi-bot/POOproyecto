@@ -4,10 +4,11 @@ import EventProclass.Cliente;
 import EventProclass.Planificador;
 
 import java.util.Date;
+import java.util.Random;
 
 public class Evento {
-    protected int ID;
-    protected Evento tipo;
+    protected final int ID ;
+    protected String tipo;
     protected Date fecha;
     protected Planificador planificador;
     protected Cliente cliente;
@@ -17,8 +18,7 @@ public class Evento {
     protected int numeroPersonas;
     protected int elementosAdicionales;
 
-    public Evento(int ID, Evento tipo, Date fecha, Planificador planificador, Cliente cliente, double precioBase, Estado estado, Date duracion, int numeroPersonas, int elementosAdicionales) {
-        this.ID = ID;
+    public Evento(String tipo, Date fecha, Planificador planificador, Cliente cliente, double precioBase, Estado estado, Date duracion, int numeroPersonas, int elementosAdicionales) {
         this.tipo = tipo;
         this.fecha = fecha;
         this.planificador = planificador;
@@ -28,78 +28,43 @@ public class Evento {
         this.duracion = duracion;
         this.numeroPersonas = numeroPersonas;
         this.elementosAdicionales = elementosAdicionales;
+        this.ID = generarCodigo();
     }
 
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
-    public Evento getTipo() {
+    public String getTipo() {
         return tipo;
-    }
-
-    public void setTipo(Evento tipo) {
-        this.tipo = tipo;
     }
 
     public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
     public Planificador getPlanificador() {
         return planificador;
-    }
-
-    public void setPlanificador(Planificador planificador) {
-        this.planificador = planificador;
     }
 
     public Cliente getCliente() {
         return cliente;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
     public double getPrecioBase() {
         return precioBase;
     }
 
-    public void setPrecioBase(double precioBase) {
-        this.precioBase = precioBase;
+    public Estado getEstado() {
+        return estado;
     }
 
     public Date getDuracion() {
         return duracion;
     }
 
-    public void setDuracion(Date duracion) {
-        this.duracion = duracion;
-    }
-
     public int getNumeroPersonas() {
         return numeroPersonas;
     }
 
-    public void setNumeroPersonas(int numeroPersonas) {
-        this.numeroPersonas = numeroPersonas;
-    }
-
     public int getElementosAdicionales() {
         return elementosAdicionales;
-    }
-
-    public void setElementosAdicionales(int elementosAdicionales) {
-        this.elementosAdicionales = elementosAdicionales;
     }
 
     public void mostrarInformacion(){
@@ -108,5 +73,11 @@ public class Evento {
 
     public void mostrarPromociones(){
         System.out.println("Some Code!");
+    }
+    //Genera un numero aletorio y se le asigna el valor a la variable de instancia ID, este valor es unico
+    //y no retorna nada.
+    private int generarCodigo(){
+        Random r = new Random();
+        return r.nextInt(10000);
     }
 }

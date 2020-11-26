@@ -21,4 +21,5 @@ public class Sistema {
     public static void main(String[] args) {
         interfazEventpro metodo=new interfazEventpro();
      metodo.iniciarSeccion();
+
 }}

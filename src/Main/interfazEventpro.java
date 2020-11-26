@@ -59,6 +59,11 @@ public class interfazEventpro {
         }
             else{
 System.out.println("1. Consultar solicitudes pendientes.\n 2. Registrar Evento.\n3. Confirmar Evento.\n4. Consultar Evento\n5. Salir");
+System.out.print("Escoja una opcion:");
+            opcion = sc.nextInt();
+            sc.nextLine();
+            while (opcion != 5) {}
+
                       }
 
         }

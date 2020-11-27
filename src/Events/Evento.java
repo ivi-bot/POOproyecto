@@ -3,6 +3,7 @@ package Events;
 import EventProclass.Cliente;
 import EventProclass.Planificador;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
@@ -17,6 +18,7 @@ public class Evento {
     protected Date duracion;
     protected int numeroPersonas;
     protected int elementosAdicionales;
+    private ArrayList<Integer> codes;
 
     public Evento(String tipo, Date fecha, Planificador planificador, Cliente cliente, double precioBase, Estado estado, Date duracion, int numeroPersonas, int elementosAdicionales) {
         this.tipo = tipo;
@@ -74,10 +76,16 @@ public class Evento {
     public void mostrarPromociones(){
         System.out.println("Some Code!");
     }
-    //Genera un numero aletorio y se le asigna el valor a la variable de instancia ID, este valor es unico
-    //y no retorna nada.
+
+    /*La funcione generarCode genera un numero aleatorio entre el rango de 0 a 100000, y devuelve un entero
+    * que es el codigo que se le asigna a la variable de instacia ID*/
     private int generarCodigo(){
         Random r = new Random();
-        return r.nextInt(10000);
+        int n = r.nextInt(100000);
+        while(codes.contains(n)){
+            n = r.nextInt(100000);
+        }
+        codes.add(n);
+        return n;
     }
 }

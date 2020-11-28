@@ -5,6 +5,9 @@
  */
 package EventProclass;
 
+
+import Events.Evento;
+
 import java.util.Scanner;
 
 /**
@@ -20,7 +23,8 @@ public class Usuario {
     protected Scanner sc;
     //protected String opcion_usuario; 
     public void mostrarInformacion(){
-        System.out.println("Bienvenid@ "+this.nombre+" "+this.apellido+"\n");} 
+        System.out.println("Bienvenid@ "+this.nombre+" "+this.apellido+"\n");
+    }
 
     public String getNombre() {
         return nombre;

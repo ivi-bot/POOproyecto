@@ -69,6 +69,10 @@ public class Evento {
         return elementosAdicionales;
     }
 
+    public int getID() {
+        return ID;
+    }
+
     public void mostrarInformacion(){
         System.out.println("Some Code");
     }

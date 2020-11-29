@@ -19,7 +19,7 @@ public class Factura {
         this.estado = estado;
         this.codigoTransaccion = codigoTransaccion;
         this.fechaRegistro = fechaRegistro;
-    }
+    } 
 
     public int getCodigoPago() {
         return codigoPago;

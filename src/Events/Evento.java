@@ -1,7 +1,10 @@
 package Events;
 
 import EventProclass.Cliente;
+import EventProclass.Cliente;
 import EventProclass.Planificador;
+import EventProclass.Planificador;
+import Events.Estado;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,6 +35,12 @@ public class Evento {
         this.elementosAdicionales = elementosAdicionales;
         this.ID = generarCodigo();
     }
+
+    public Evento() {
+        this.ID = generarCodigo();
+       
+    }
+    
 
     public String getTipo() {
         return tipo;

@@ -6,7 +6,6 @@
 package EventProclass;
 
 
-import Events.Evento;
 
 import java.util.Scanner;
 

@@ -19,7 +19,7 @@ import java.util.Scanner;
  */
 public class interfazEventpro {
 
-    private ArrayList<String> usuarios;
+    private ArrayList<String> usuarios = Archivo.LeeFichero("usuarios.txt");
     int opcion;
     String opcion2;
 
@@ -43,14 +43,14 @@ public class interfazEventpro {
             nomUsuarios.add(datos[0]);
             contraseñas.add(datos[3]);
         }
-        while (nomUsuarios.contains(usuarioComprobar) == false) {
+        while (!nomUsuarios.contains(usuarioComprobar)) {
             System.out.println("Ingrese un usuario  válido");
             usuarioComprobar = sc.nextLine();
         }
         usuario.setNomUsuario(usuarioComprobar);
         System.out.print("CONTRASEÑA: ");
         String contraseñaComprobar = sc.nextLine();
-        while (contraseñas.get(nomUsuarios.indexOf(usuarioComprobar)).equals(contraseñaComprobar)==false) {
+        while (contraseñas.get(nomUsuarios.indexOf(usuarioComprobar)).equals(contraseñaComprobar)) {
             System.out.print("Ingrese la contraseña correctamente: ");
             contraseñaComprobar = sc.nextLine();
         }
@@ -111,4 +111,5 @@ public class interfazEventpro {
         }
 
     }
+
 }

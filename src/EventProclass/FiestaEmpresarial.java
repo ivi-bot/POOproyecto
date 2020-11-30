@@ -5,10 +5,19 @@
  */
 package EventProclass;
 
+import Events.Evento;
+
 /**
  *
  * @author FERNAN
  */
-public class FiestaEmpresarial {
-    
+public class FiestaEmpresarial extends Evento {
+
+
+    @Override
+    public void mostrarPromociones() {
+
+    }
+
+
 }

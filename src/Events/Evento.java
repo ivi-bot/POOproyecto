@@ -1,10 +1,7 @@
 package Events;
 
 import EventProclass.Cliente;
-import EventProclass.Cliente;
 import EventProclass.Planificador;
-import EventProclass.Planificador;
-import Events.Estado;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,9 +18,11 @@ public class Evento {
     protected Date duracion;
     protected int numeroPersonas;
     protected int elementosAdicionales;
+    protected Date horaInicio;
+    protected Date horaFin;
     private ArrayList<Integer> codes;
 
-    public Evento(String tipo, Date fecha, Planificador planificador, Cliente cliente, double precioBase, Estado estado, Date duracion, int numeroPersonas, int elementosAdicionales) {
+    public Evento(String tipo, Date fecha, Planificador planificador, Cliente cliente, double precioBase, Estado estado, Date duracion, int numeroPersonas, int elementosAdicionales, Date horaInicio, Date horaFin) {
         this.tipo = tipo;
         this.fecha = fecha;
         this.planificador = planificador;
@@ -33,14 +32,15 @@ public class Evento {
         this.duracion = duracion;
         this.numeroPersonas = numeroPersonas;
         this.elementosAdicionales = elementosAdicionales;
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
         this.ID = generarCodigo();
     }
 
     public Evento() {
         this.ID = generarCodigo();
-       
+
     }
-    
 
     public String getTipo() {
         return tipo;
@@ -82,6 +82,18 @@ public class Evento {
         return ID;
     }
 
+    public Date getHoraInicio() {
+        return horaInicio;
+    }
+
+    public Date getHoraFin() {
+        return horaFin;
+    }
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
+
     public void mostrarInformacion(){
         System.out.println("Some Code");
     }
@@ -94,9 +106,9 @@ public class Evento {
     * que es el codigo que se le asigna a la variable de instacia ID*/
     private int generarCodigo(){
         Random r = new Random();
-        int n = r.nextInt(100000);
+        int n = r.nextInt(1000);
         while(codes.contains(n)){
-            n = r.nextInt(100000);
+            n = r.nextInt(1000);
         }
         codes.add(n);
         return n;

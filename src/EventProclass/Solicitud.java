@@ -22,18 +22,27 @@ public class Solicitud {
     private int numero;
     private final Cliente cliente;
     private final Planificador planificador;
-    private final Evento evento;
+    private final Date fechaEvento;
+    private final String tipoEvento;
     private final Date fechaSolicitud;
     private Estado estadoSolicitud;
+    private final double precioBase;
     private ArrayList<Integer> ids;
 
-    public Solicitud(int numero, Cliente cliente, Planificador planificador, Date fechaSolicitud, Evento evento) {
+    public Solicitud(int numero, Cliente cliente, Planificador planificador, String tipoEvento,Date fechaSolicitud, Date fechaEvento) {
         this.numero = numero;
         this.cliente = cliente;
         this.planificador = planificador;
         this.fechaSolicitud = fechaSolicitud;
-        this.evento = evento;
+        this.fechaEvento = fechaEvento;
         this.estadoSolicitud = Estado.PENDIENTE;
+        this.tipoEvento = tipoEvento;
+        if(tipoEvento.equals("Boda"))
+            this.precioBase = 3500.00;
+        else if(tipoEvento.equals("Fiesta Empresarial"))
+            this.precioBase = 2000.00;
+        else
+            this.precioBase = 300;
         this.ID = generarCodigo();
     }
 
@@ -57,12 +66,20 @@ public class Solicitud {
         return fechaSolicitud;
     }
 
-    public Evento getEvento() {
-        return evento;
-    }
-
     public Estado getEstadoSolicitud() {
         return estadoSolicitud;
+    }
+
+    public String getTipoEvento() {
+        return tipoEvento;
+    }
+
+    public Date getFechaEvento() {
+        return fechaEvento;
+    }
+
+    public double getPrecioBase() {
+        return precioBase;
     }
 
     public void setNumero(int numero) {

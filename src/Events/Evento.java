@@ -20,9 +20,10 @@ public class Evento {
     protected int elementosAdicionales;
     protected Date horaInicio;
     protected Date horaFin;
-    private ArrayList<Integer> codes;
+    protected int capacidad;
+    private final ArrayList<Integer> codes = new ArrayList<>();
 
-    public Evento(String tipo, Date fecha, Planificador planificador, Cliente cliente, double precioBase, Estado estado, Date duracion, int numeroPersonas, int elementosAdicionales, Date horaInicio, Date horaFin) {
+    public Evento(String tipo, Date fecha, Planificador planificador, Cliente cliente, double precioBase, Estado estado, Date duracion, int numeroPersonas, int elementosAdicionales) {
         this.tipo = tipo;
         this.fecha = fecha;
         this.planificador = planificador;
@@ -32,8 +33,6 @@ public class Evento {
         this.duracion = duracion;
         this.numeroPersonas = numeroPersonas;
         this.elementosAdicionales = elementosAdicionales;
-        this.horaInicio = horaInicio;
-        this.horaFin = horaFin;
         this.ID = generarCodigo();
     }
 
@@ -90,6 +89,14 @@ public class Evento {
         return horaFin;
     }
 
+    public void setHoraFin(Date horaFin) {
+        this.horaFin = horaFin;
+    }
+
+    public void setCapacidad(int capacidad) {
+        this.capacidad = capacidad;
+    }
+
     public void setEstado(Estado estado) {
         this.estado = estado;
     }
@@ -102,7 +109,7 @@ public class Evento {
         System.out.println("Some Code!");
     }
 
-    /*La funcione generarCode genera un numero aleatorio entre el rango de 0 a 100000, y devuelve un entero
+    /*La funcion generarCode genera un numero aleatorio entre el rango de 0 a 100000, y devuelve un entero
     * que es el codigo que se le asigna a la variable de instacia ID*/
     private int generarCodigo(){
         Random r = new Random();

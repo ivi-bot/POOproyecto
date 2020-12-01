@@ -3,13 +3,17 @@ package EventProclass;
 
 import Events.Estado;
 import Events.Evento;
+
+import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 /**
  *
  * @author
  */
+
 public class Planificador extends Usuario {
     private List<Evento> eventos;
     private List<Solicitud> solicitudes;
@@ -23,6 +27,7 @@ public class Planificador extends Usuario {
     }
 
     public void registrarEvento(int ID) {
+        Scanner sc = new Scanner(System.in);
         System.out.println("/**********************REGISTRO DE EVENTOS******"
                 + "****************/\n/*\t\t\t\t\t\t\t\t\t\b\b*/\n/****************"
                 + "*******************************************/");
@@ -30,9 +35,25 @@ public class Planificador extends Usuario {
             if (s.getID() == ID && s.getPlanificador().getApellido().equals(apellido)) {
                 System.out.println("DATOS: ");
                 System.out.println("CLIENTE: " + s.getCliente() + "\nPLANIFICADOR ASIGNADO: " + this.getApellido()
-                        + " " + this.nombre + "\nFECHA DE REGISTRO:  " + s.getFechaSolicitud() + "\nTIPO DE EVENTO: " + s.getEvento().getTipo()
-                        + "\nFECHA DEL EVENTO: " + s.getEvento().getFecha() + "\nPRECIO BASE: " + s.getEvento().getPrecioBase());
-                anadirEvento(s.getEvento());
+                        + " " + this.nombre + "\nFECHA DE REGISTRO:  " + s.getFechaSolicitud() + "\nTIPO DE EVENTO: " + s.getTipoEvento()
+                        + "\nFECHA DEL EVENTO: " + s.getFechaEvento() + "\nPRECIO BASE: " + s.getPrecioBase());
+                //anadirEvento(s.getEvento());
+                System.out.println("\n\n/**********************REGISTRO DE DATOS DEL EVENTOS******"
+                        + "****************/\n/*\t\t\t\t\t\t\t\t\t\b\b*/\n/****************"
+                        + "*******************************************/");
+                Date hIni, hFin;
+                System.out.print("Hora Inicio: ");
+                System.out.print("Hora Fin");
+                System.out.print("Capacidad");
+                
+                if(s.getTipoEvento().equals("Boda")){
+                    System.out.println("Se Registra Los Datos De Boda");
+                }else if(s.getTipoEvento().equals("Fiesta Empresarial")){
+                    System.out.println("Se Registra Los Datos De La Fiesta Empresarial");
+                }else{
+                    System.out.println("Se Registra Los Datos De La Fiesta Infantil");
+                }
+
             }else{
                 System.out.println("Solicitud No Encontrada!");
             }

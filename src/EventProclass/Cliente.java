@@ -67,23 +67,30 @@ public class Cliente extends Usuario {
                 System.out.println("/**********************EVENTO BODA******"
                         + "****************/");
                 while (validarTiempo(1) != true) {
-                    System.out.println("La fecha es muy próxima. Para este tipo de evento debemos tener \n"
-                            + " por lo menos 10 meses para planificar. Ingrese nuevamente.");
-                    validarTiempo(1);
+                    System.out.println("***La fecha es muy próxima. Para este tipo de evento debemos tener \n"
+                            + "por lo menos 10 meses para planificar. Ingrese nuevamente.");
                 }
                 System.out.println("¡Fecha válida!");
-                
+
                 break;
             case "2":
                 System.out.println("/**********************EVENTO FIESTA INFANTIL******"
                         + "****************/");
-                validarTiempo(2);
+                while (validarTiempo(2) != true) {
+                    System.out.println("***La fecha es muy próxima. Para este tipo de evento debemos tener \n"
+                            + "por lo menos 3 semanas para planificar. Ingrese nuevamente.");
+                }
+                System.out.println("¡Fecha válida!");
 
                 break;
             case "3":
                 System.out.println("/**********************EVENTO FIESTA EMPRESARIAL******"
                         + "****************/");
-                validarTiempo(3);
+                while (validarTiempo(3) != true) {
+                    System.out.println("***La fecha es muy próxima. Para este tipo de evento debemos tener \n"
+                            + "por lo menos 2 meses para planificar. Ingrese nuevamente.");
+                }
+                System.out.println("¡Fecha válida!");
 
                 break;
             default:
@@ -98,6 +105,23 @@ public class Cliente extends Usuario {
         System.out.println("/**********************REGISTRO PAGO******"
                 + "****************/\n/*\t\t\t\t\t\t\t\t\t\b\b*/\n/****************"
                 + "*******************************************/");
+        Evento evento=new Evento();
+        //int codigoPago, int codigoEvento, double totalPagar, Estado estado, int codigoTransaccion, Date fechaRegistro
+        int codigo=evento.getID();
+        int codigoT;
+        System.out.println("Su orden con código "+codigo+"esta pendiente de pago");
+        System.out.print("¿Desea registrar pago ahora? (S/N): ");
+        String op=sc.nextLine();
+        while(op!="S"||op!="N"){
+            System.out.println("Ingrese una opcion correcta: ");}
+        if(op=="S"){
+            System.out.print("Ingrese el codigo de la transacción: ");
+            codigoT=sc.nextInt();
+            System.out.println("Listo, se ha registrado. Cuando el planificador valide el pago se pondrá en contacto con usted");
+        }
+        else{
+            System.out.println("Gracias");
+        }
     }
 
 }

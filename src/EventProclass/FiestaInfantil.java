@@ -1,6 +1,7 @@
 
 package EventProclass;
 
+<<<<<<< HEAD
 import Events.Estado;
 import Events.Evento;
 import java.util.Date;
@@ -24,4 +25,18 @@ public class FiestaInfantil extends Evento{
         System.out.println("Promocion (FiestaInfantil)");    
     }
     
+=======
+import Events.Evento;
+
+/**
+ *
+ * @author FERNAN
+ */
+public class FiestaInfantil extends Evento {
+
+    @Override
+    public void mostrarPromociones() {
+
+    }
+>>>>>>> d1e21fb83679e9b9a1cbcbafcdb9b76a45a177e9
 }

@@ -1,6 +1,7 @@
 
 package EventProclass;
 
+<<<<<<< HEAD
 import Events.Estado;
 import Events.Evento;
 import java.util.Date;
@@ -22,4 +23,18 @@ public class Boda extends Evento{
     System.out.println("Promocion (Boda)");    
     }
     
+=======
+import Events.Evento;
+
+/**
+ *
+ * @author FERNAN
+ */
+public class Boda extends Evento {
+
+    @Override
+    public void mostrarPromociones() {
+        System.out.println("Recuerde que los novios tendran un 25% de descuento si compran sus tickets de luna de miel en la arelinea LATAM.");
+    }
+>>>>>>> d1e21fb83679e9b9a1cbcbafcdb9b76a45a177e9
 }

@@ -1,8 +1,5 @@
 package EventProclass;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class Opcional {
     private double precio;
     private int cantidad;
@@ -16,7 +13,7 @@ public class Opcional {
         this.valor = this.cantidad * this.precio;
     }
 
-    public Opcional(double precio, Adicional tio) {
+    public Opcional(double precio, Adicional tipo) {
         this.valor = this.precio;
     }
 
@@ -52,4 +49,13 @@ public class Opcional {
         this.tipo = tipo;
     }
 
+    @Override
+    public String toString() {
+        return "Opcional{" +
+                "precio=" + precio +
+                ", cantidad=" + cantidad +
+                ", valor=" + valor +
+                ", tipo=" + tipo +
+                '}';
+    }
 }

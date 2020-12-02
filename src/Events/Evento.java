@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.Random;
 
 public class Evento {
-    protected final int ID ;
+    protected final int ID;
     protected String tipo;
     protected Date fecha;
     protected Planificador planificador;
@@ -74,7 +74,7 @@ public class Evento {
     public void mostrarPromociones(){
         System.out.println("Some Code!");
     }
-    //Genera un numero aletorio y se le asigna el valor a la variable de instancia ID, este valor es unico
+    //Genera un numero aleatorio y se le asigna el valor a la variable de instancia ID, este valor es unico
     //y no retorna nada.
     private int generarCodigo(){
         Random r = new Random();

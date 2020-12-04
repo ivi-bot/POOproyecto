@@ -1,12 +1,12 @@
 package EventProclass;
 
-
 import Events.Estado;
 import Events.Evento;
 
-import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+
 
 /**
  *
@@ -14,27 +14,28 @@ import java.util.Scanner;
  */
 
 public class Planificador extends Usuario {
+    private static final SimpleDateFormat dateFormatHora = new SimpleDateFormat("HH:mm");
     private List<Evento> eventos;
     private List<Solicitud> solicitudes;
     private List<Factura> ordendepagos;
-    //Esta funcion permite consultar todas la solicitudes que tiene cada planificar y no retorna nada.
 
-    
-    
+    //Esta funcion permite consultar todas la solicitudes que tiene cada planificador y no retorna nada.
     public void consultarSolicitudes() {
         System.out.println("/**********************SOLICITUDES PENDIENTES******"
                 + "****************/\n/*\t\t\t\t\t\t\t\t\t\b\b*/\n/****************"
                 + "*******************************************/");
-        solicitudes.forEach(s -> System.out.println(s.getID() + "- " +s.getTipoEvento()+s.getFechaEvento()));
+        solicitudes.forEach(s -> System.out.println(s.getID() + " - " +s.getFechaEvento()));
     }
 
-    public void registrarEvento(int ID) {
-        Scanner sc = new Scanner(System.in);
+    //Esta Funcion le permite al planificador registrar un evento que el usuario a solicitado
+    public void registrarEvento() {
+        System.out.println("Ingrese el id de la solicitud: ");
+        int ID = sc.nextInt();
         System.out.println("/**********************REGISTRO DE EVENTOS******"
                 + "****************/\n/*\t\t\t\t\t\t\t\t\t\b\b*/\n/****************"
                 + "*******************************************/");
         for (Solicitud s : solicitudes) {
-            if (s.getID() == ID && s.getPlanificador().getApellido().equals(apellido)) {
+            if (s.getID() == ID) {
                 System.out.println("DATOS: ");
                 System.out.println("CLIENTE: " + s.getCliente() + "\nPLANIFICADOR ASIGNADO: " + this.getApellido()
                         + " " + this.nombre + "\nFECHA DE REGISTRO:  " + s.getFechaSolicitud() + "\nTIPO DE EVENTO: " + s.getTipoEvento()
@@ -43,11 +44,21 @@ public class Planificador extends Usuario {
                 System.out.println("\n\n/**********************REGISTRO DE DATOS DEL EVENTOS******"
                         + "****************/\n/*\t\t\t\t\t\t\t\t\t\b\b*/\n/****************"
                         + "*******************************************/");
-                Date hIni, hFin;
+                String hIni, hFin;
+                int cap;
                 System.out.print("Hora Inicio: ");
-                System.out.print("Hora Fin");
-                System.out.print("Capacidad");
-                
+                hIni = sc.nextLine();
+                System.out.print("Hora Fin:");
+                hFin = sc.nextLine();
+                System.out.print("Capacidad: ");
+                cap = sc.nextInt();
+                String op;
+                System.out.println("Desea registrar elementos adicionales (S/N)?");
+                op = sc.nextLine().strip();
+                if(op.equals("S")){
+                    registrarAdicionales();
+                }
+
                 if(s.getTipoEvento().equals("Boda")){
                     System.out.println("Se Registra Los Datos De Boda");
                 }else if(s.getTipoEvento().equals("Fiesta Empresarial")){
@@ -93,7 +104,7 @@ public class Planificador extends Usuario {
                 + "****************/\n/*\t\t\t\t\t\t\t\t\t\b\b*/\n/****************"
                 + "*******************************************/");
         System.out.println("TIPOS DE EVENTOS \n1. Boda\n2. Fiesta Infantil \n3. Fiesta Empresarial");
-        System.out.print("Elija el tiepo de evnetos que requiere consultar: ");
+        System.out.print("Elija el tiepo de eventos que requiere consultar: ");
         op = sc.nextInt();
         for(Evento e: eventos){
             if(e.getPlanificador().getApellido().equals(apellido)){
@@ -151,4 +162,91 @@ public class Planificador extends Usuario {
     public void anadirOrdendePago(Factura ordendepago){
         ordendepagos.add(ordendepago);
     }
+
+    public void registrarAdicionales(){
+        ArrayList<Integer> ops = new ArrayList<>();
+        String op = "S";
+        int menu;
+        double total = 0.00;
+        while(op.equals("S")) {
+            System.out.println("/** REGISTRO DE ELEMENTOS ADICONALES PARA EL EVENTO **/ \nLas opciones son: \n1. Comida\n" +
+                    "2. Bocaditos \n3. Musica \n4. Fotografia \n5. Bebida \n6. Regresar al menu anterior" );
+            do{
+                System.out.print("Elija elemento a adicionar: ");
+                menu = sc.nextInt();
+            }while(ops.contains(menu));
+            ops.add(menu);
+            switch (menu){
+                case 1:
+                    System.out.print("Cantida de platos: ");
+                    int c = sc.nextInt();
+                    Opcional o1 = new Opcional(15.00,c,Adicional.BEBIDA);
+                    System.out.println(o1.getValor());
+                    System.out.println("Agregar? (S/N)");
+                    op = sc.nextLine();
+                    if(op.equals("S"))
+                        System.out.println("Se ha agregado su eleccion.");
+                        total += o1.getValor();
+
+                    break;
+                case 2:
+                    System.out.print("Cantida de platos: ");
+                    c = sc.nextInt();
+                    double p =  c < 150 ? 0.25 : 0.10;
+                    Opcional o2 = new Opcional(p,c,Adicional.BOCADITO);
+                    System.out.println(o2.getValor());
+                    System.out.println("Agregar? (S/N)");
+                    op = sc.nextLine();
+                    if(op.equals("S")) {
+                        System.out.println("Se ha agregado su eleccion.");
+                        total += o2.getValor();
+                    }
+                    break;
+                case 3:
+                    int cont=0;
+                    System.out.println("Para musica se presentan las opciones de: \n1. DJ($300) \n2. ($2000)");
+                    System.out.println("Que Prefiere?");
+                    menu = sc.nextInt();
+                    if(menu == 1){
+                        p = 300.00;
+                    }else{
+                        p = 2000.00;
+                    }
+                    Opcional o3 = new Opcional(p,Adicional.MUSICA);
+                    sc.nextLine();
+                    System.out.println("Agregar? (S/N)");
+                    op = sc.nextLine();
+                    if(op.equals("S")){
+                        System.out.println("Se ha agregado su eleccion.");
+                        total += o3.getValor();}
+                    if(cont == 0){
+                        ops.remove((Integer) 3);
+                        cont+=1;
+                    }
+                    break;
+                case 4:
+                    //Falta Bebida!
+                    break;
+                case 5:
+                    Opcional o5 = new Opcional(500,Adicional.FOTOGRAFIA);
+                    System.out.println("Agregar? (S/N)");
+                    op = sc.nextLine();
+                    if(op.equals("S")){
+                        System.out.println("Se ha agregado su eleccion.");
+                        total += o5.getValor();}
+                    break;
+                default:
+                    System.out.println("Volviendo al Menu ");
+                    break;
+            }
+            if(menu > 5){
+                op = "N";
+                ops.clear();
+            }else{
+                System.out.println("Desea registrar elementos adicionales (S/N)?");
+                op = sc.nextLine().strip();
+            }
+        } //endwhile
+    }
+
 }

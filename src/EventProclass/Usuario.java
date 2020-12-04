@@ -30,6 +30,7 @@ public class Usuario {
         this.tipo = tipo;
     }
 
+
     public Usuario() {
         this.nombre = nombre;
         this.apellido = apellido;

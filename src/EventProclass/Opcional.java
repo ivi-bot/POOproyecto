@@ -13,6 +13,7 @@ public class Opcional {
         this.valor = this.cantidad * this.precio;
     }
 
+
     public Opcional(double precio, Adicional tipo) {
         this.valor = this.precio;
     }
@@ -21,16 +22,8 @@ public class Opcional {
         return precio;
     }
 
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
-
     public int getCantidad() {
         return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
     }
 
     public double getValor() {
@@ -45,17 +38,4 @@ public class Opcional {
         return tipo;
     }
 
-    public void setTipo(Adicional tipo) {
-        this.tipo = tipo;
-    }
-
-    @Override
-    public String toString() {
-        return "Opcional{" +
-                "precio=" + precio +
-                ", cantidad=" + cantidad +
-                ", valor=" + valor +
-                ", tipo=" + tipo +
-                '}';
-    }
 }

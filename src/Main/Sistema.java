@@ -5,7 +5,7 @@
  */
 package Main;
 
-//import EventProclass.Archivo;
+//import Archivos.Archivo;
 //import EventProclass.Usuario;
 
 //import java.util.ArrayList;
@@ -16,8 +16,6 @@ package Main;
  * @author
  */
 public class Sistema {
-
-       
     public static void main(String[] args) {
         interfazEventpro metodo=new interfazEventpro();
         metodo.iniciarSeccion();

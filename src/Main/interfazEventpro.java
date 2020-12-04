@@ -5,7 +5,7 @@
  */
 package Main;
 
-import EventProclass.Archivo;
+import Archivos.Archivo;
 import EventProclass.Cliente;
 import EventProclass.Planificador;
 import EventProclass.Solicitud;
@@ -26,14 +26,28 @@ import java.util.Scanner;
  */
 public class interfazEventpro {
 
+
     private ArrayList<String> usuarios = Archivo.LeeFichero("usuarios.txt");
     String opcion;
+
+
+
     String opcion2;
 
     /**
      * Inicio del sistema
      */
     public void iniciarSeccion() {
+
+//        ArrayList<String> usuarios = Archivo.LeeFichero("usuarios.txt");
+//        ArrayList<String> nomUsuarios = new ArrayList<>();
+//        ArrayList<String> contraseñas = new ArrayList<>();
+//        ArrayList<String> planificadores = new ArrayList<>();
+//        Usuario usuario = new Usuario();
+//        Cliente cliente = new Cliente();
+//        Planificador p = new Planificador();
+//        Evento evento = new Evento();
+
 
         usuarios = Archivo.LeeFichero("usuarios.txt");
 
@@ -42,6 +56,7 @@ public class interfazEventpro {
         Scanner sc = new Scanner(System.in);
         System.out.print("USUARIO: ");
         String usuarioComprobar = sc.nextLine();
+
         ArrayList<String> nombres = new ArrayList<>();
         ArrayList<String> nomUsuarios = new ArrayList<>();
         ArrayList<String> contraseñas = new ArrayList<>();
@@ -49,6 +64,7 @@ public class interfazEventpro {
         ArrayList<String> apellidoPlanificador = new ArrayList<>();
         ArrayList<Character> tipo = new ArrayList<>();
         ArrayList<String> apellidoUsuario = new ArrayList<>();
+
 
         for (int i = 0; i < usuarios.size(); i++) {
             String[] datos = usuarios.get(i).split(";");
@@ -154,7 +170,8 @@ public class interfazEventpro {
 
                         break;
                     case 2:
-                        p.registrarEvento(5);
+
+                      p.registrarEvento();
 
                         break;
                     case 3:

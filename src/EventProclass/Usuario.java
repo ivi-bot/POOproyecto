@@ -20,7 +20,28 @@ public class Usuario {
     protected String contraseña;
     protected char tipo;
     protected Scanner sc;
-    //protected String opcion_usuario; 
+    //protected String opcion_usuario;
+
+    public Usuario(String nombre, String apellido, String nomUsuario, String contraseña, char tipo) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.nomUsuario = nomUsuario;
+        this.contraseña = contraseña;
+        this.tipo = tipo;
+    }
+
+    public Usuario() {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.nomUsuario = nomUsuario;
+        this.contraseña = contraseña;
+        this.tipo = tipo;
+        this.sc = sc;
+    }
+    
+    
+    
+    
     public void mostrarInformacion(){
         System.out.println("Bienvenid@ "+this.nombre+" "+this.apellido+"\n");
     }

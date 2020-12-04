@@ -1,19 +1,17 @@
 package Events;
 
 import EventProclass.Cliente;
-import EventProclass.Cliente;
 import EventProclass.Planificador;
-import EventProclass.Planificador;
-import Events.Estado;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
 public class Evento {
-    protected final int ID ;
+    protected final int ID;
     protected String tipo;
-    protected Date fecha;
+    protected Date fechaEvento;
+    protected Date fechasolicitud;
     protected Planificador planificador;
     protected Cliente cliente;
     protected double precioBase;
@@ -21,11 +19,14 @@ public class Evento {
     protected Date duracion;
     protected int numeroPersonas;
     protected int elementosAdicionales;
-    private ArrayList<Integer> codes;
+    protected Date horaInicio;
+    protected Date horaFin;
+    protected int capacidad;
+    private final ArrayList<Integer> codes = new ArrayList<>();
 
-    public Evento(String tipo, Date fecha, Planificador planificador, Cliente cliente, double precioBase, Estado estado, Date duracion, int numeroPersonas, int elementosAdicionales) {
+    public Evento(String tipo, Date fechaEvento, Planificador planificador, Cliente cliente, double precioBase, Estado estado, Date duracion, int numeroPersonas, int elementosAdicionales) {
         this.tipo = tipo;
-        this.fecha = fecha;
+        this.fechaEvento = fechaEvento;
         this.planificador = planificador;
         this.cliente = cliente;
         this.precioBase = precioBase;
@@ -38,16 +39,15 @@ public class Evento {
 
     public Evento() {
         this.ID = generarCodigo();
-       
+
     }
-    
 
     public String getTipo() {
         return tipo;
     }
 
-    public Date getFecha() {
-        return fecha;
+    public Date getFechaEvento() {
+        return fechaEvento;
     }
 
     public Planificador getPlanificador() {
@@ -82,6 +82,42 @@ public class Evento {
         return ID;
     }
 
+    public Date getHoraInicio() {
+        return horaInicio;
+    }
+
+    public Date getHoraFin() {
+        return horaFin;
+    }
+
+    public void setHoraFin(Date horaFin) {
+        this.horaFin = horaFin;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public Date getFechasolicitud() {
+        return fechasolicitud;
+    }
+
+    public void setFechasolicitud(Date fechasolicitud) {
+        this.fechasolicitud = fechasolicitud;
+    }
+
+    public void setCapacidad(int capacidad) {
+        this.capacidad = capacidad;
+    }
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
+
+    public void setFechaEvento(Date fechaEvento) {
+        this.fechaEvento = fechaEvento;
+    }
+
     public void mostrarInformacion(){
         System.out.println("Some Code");
     }
@@ -89,14 +125,16 @@ public class Evento {
     public void mostrarPromociones(){
         System.out.println("Some Code!");
     }
+    //Genera un numero aleatorio y se le asigna el valor a la variable de instancia ID, este valor es unico
+    //y no retorna nada.
 
-    /*La funcione generarCode genera un numero aleatorio entre el rango de 0 a 100000, y devuelve un entero
+    /*La funcion generarCode genera un numero aleatorio entre el rango de 0 a 100000, y devuelve un entero
     * que es el codigo que se le asigna a la variable de instacia ID*/
     private int generarCodigo(){
         Random r = new Random();
-        int n = r.nextInt(100000);
+        int n = r.nextInt(1000);
         while(codes.contains(n)){
-            n = r.nextInt(100000);
+            n = r.nextInt(1000);
         }
         codes.add(n);
         return n;

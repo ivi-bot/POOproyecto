@@ -49,4 +49,13 @@ public class Opcional {
         this.tipo = tipo;
     }
 
+    @Override
+    public String toString() {
+        return "Opcional{" +
+                "precio=" + precio +
+                ", cantidad=" + cantidad +
+                ", valor=" + valor +
+                ", tipo=" + tipo +
+                '}';
+    }
 }

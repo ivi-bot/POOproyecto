@@ -29,14 +29,11 @@ public class Usuario {
         this.contraseña = contraseña;
         this.tipo = tipo;
     }
-
-    public Usuario() {
-        this.nombre = nombre;
+    
+    public Usuario(String nombre, String apellido){
+     this.nombre = nombre;
         this.apellido = apellido;
-        this.nomUsuario = nomUsuario;
-        this.contraseña = contraseña;
-        this.tipo = tipo;
-        this.sc = sc;
+    
     }
     
     

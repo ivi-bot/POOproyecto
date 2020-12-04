@@ -17,9 +17,27 @@ public class Planificador extends Usuario {
     private List<Evento> eventos;
     private List<Solicitud> solicitudes;
     private List<Factura> ordendepagos;
-    //Esta funcion permite consultar todas la solicitudes que tiene cada planificar y no retorna nada.
+
+    public Planificador(List<Evento> eventos, List<Solicitud> solicitudes, List<Factura> ordendepagos, String nombre, String apellido, String nomUsuario, String contraseña, char tipo) {
+        super(nombre, apellido, nomUsuario, contraseña, tipo);
+        this.eventos = eventos;
+        this.solicitudes = solicitudes;
+        this.ordendepagos = ordendepagos;
+    }
+    
+    public Planificador(String nombre, String apellido, String nomUsuario, String contraseña, char tipo){
+            super(nombre, apellido, nomUsuario, contraseña, tipo);
+
+    }
+    public Planificador(String nombre, String apellido){
+                super(nombre, apellido);
 
     
+    
+    }
+    /**
+     * Este metodo permite consultar todas la solicitudes que tiene cada planificar y no retorna nada.
+     */
     
     public void consultarSolicitudes() {
         System.out.println("/**********************SOLICITUDES PENDIENTES******"
@@ -27,7 +45,11 @@ public class Planificador extends Usuario {
                 + "*******************************************/");
         solicitudes.forEach(s -> System.out.println(s.getID() + "- " +s.getTipoEvento()+s.getFechaEvento()));
     }
-
+/**
+ * 
+ * @param ID recibe el codigo de la factura que  previamente fue generado para poder 
+ * registrar el evento
+ */
     public void registrarEvento(int ID) {
         Scanner sc = new Scanner(System.in);
         System.out.println("/**********************REGISTRO DE EVENTOS******"
@@ -62,7 +84,9 @@ public class Planificador extends Usuario {
         }
 
     }
-
+/**
+ * Método que aprueba el pago o no
+ */
     public void confirmarEvento() {
         System.out.println("/**********************CONFIRMAR EVENTO******"
                 + "****************/\n/*\t\t\t\t\t\t\t\t\t\b\b*/\n/****************"
@@ -86,6 +110,9 @@ public class Planificador extends Usuario {
         }
 
     }
+    /**
+     * Permite al planificador visualizar su lista de eventos
+     */
 
     public void consultarEvento() {
         int op, nBoda=0,nEmpre=0,nInfa=0;
@@ -151,4 +178,5 @@ public class Planificador extends Usuario {
     public void anadirOrdendePago(Factura ordendepago){
         ordendepagos.add(ordendepago);
     }
+    
 }

@@ -24,14 +24,34 @@ public class Cliente extends Usuario {
     private String telefono;
     private String correo;
     private String opcion_usuario;
+    private String fecha1;
+    private String fecha2;
     private static final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-    private boolean validarTiempo(int i) {
+    public Cliente(String telefono, String correo, String nombre, String apellido, String nomUsuario, String contraseña, char tipo) {
+        super(nombre, apellido, nomUsuario, contraseña, tipo);
+        this.telefono = telefono;
+        this.correo = correo;
+    }
 
-        Evento evento = new Evento();
+    public Cliente(String nombre, String apellido, String nomUsuario, String contraseña, char tipo) {
+        super(nombre, apellido, nomUsuario, contraseña, tipo);
+    }
+
+    /**
+     * @param tiempo opcion que se recibe del metodo crearSolicitud donde 1, es
+     * para boda, 2 fiesta infantil y 3 fiesta empresarial y dentro la se
+     * analiza si la fecha es valida
+     * @return Retorna un oolean que indicara si la fecha es correcta o no segun
+     * el tipo de evento
+     *
+     */
+    private boolean validarTiempo(int tiempo) {
+
         Date currentDate = new Date();
         String fechaActual = dateFormat.format(currentDate);
         System.out.println(dateFormat.format(currentDate));
+        System.out.println("Ingrese la fecha deseada con el siguiente formato: dd/MM/yyyy");
         System.out.print("Fecha del evento: ");
         Scanner t = new Scanner(System.in);
         String fechaUsuario = t.nextLine();
@@ -56,23 +76,32 @@ public class Cliente extends Usuario {
             int difM = difA * 12 + fin.get(Calendar.MONTH) - inicio.get(Calendar.MONTH);
             System.out.println(difM);
 
-            switch (i) {
+            switch (tiempo) {
                 case 1:
                     if (difM >= 10) {
-                        evento.setFechaEvento(secondDate);
+                        // Evento evento = new Evento("BODA", secondDate, currentDate);             
+//evento.setFechaEvento(secondDate);
+                        fecha1 = dateFormat.format(secondDate);
+                        fecha2 = fechaActual;
                         return true;
                     }
                     ;
                     break;
                 case 2:
                     if (difD >= 21) {
-                        evento.setFechaEvento(secondDate);
+                        // Evento evento = new Evento("Fiesta Infantil", secondDate, currentDate);
+                        fecha1 = dateFormat.format(secondDate);
+                        fecha2 = fechaActual;
+                        //evento.setFechaEvento(secondDate);
                         return true;
                     }
                     break;
                 case 3:
                     if (difM >= 2) {
-                        evento.setFechaEvento(secondDate);
+                        // Evento evento = new Evento("Fiesta Empresarial", secondDate, currentDate);
+                        fecha1 = dateFormat.format(secondDate);
+                        fecha2 = fechaActual;
+//evento.setFechaEvento(secondDate);
                         return true;
                     }
 
@@ -109,13 +138,11 @@ public class Cliente extends Usuario {
 //        return false;
     }
 
+    /**
+     *
+     * @return Retorna el tipo de evento que creo el usuario
+     */
     public String crearSolicitud() {
-        Evento evento = new Evento();
-                Planificador p = new Planificador();
-        Cliente cliente = new Cliente();
-
-        
-        
         Scanner sc = new Scanner(System.in);
         System.out.println("/**********************NUEVA SOLICITUD******"
                 + "****************/\n/*\t\t\t\t\t\t\t\t\t\b\b*/\n/****************"
@@ -124,6 +151,7 @@ public class Cliente extends Usuario {
         System.out.println("TIPO DE EVENTO (Elija)\n1.Boda\n2.Fiesta Infantil\n3.Fiesta Empresarial");
         System.out.print("Seleccione: ");
         opcion_usuario = sc.nextLine();
+
         switch (opcion_usuario) {
 
             case "1":
@@ -133,10 +161,9 @@ public class Cliente extends Usuario {
                     System.out.println("***La fecha es muy próxima. Para este tipo de evento debemos tener \n"
                             + "por lo menos 10 meses para planificar. Ingrese nuevamente.");
                 }
-                //evento.setTipo("BODA");
                 System.out.println("¡Fecha válida!");
 
-                                return "BODA";
+                return "BODA" + fecha1 + fecha2;
 
             case "2":
                 System.out.println("/**********************EVENTO FIESTA INFANTIL******"
@@ -145,9 +172,9 @@ public class Cliente extends Usuario {
                     System.out.println("***La fecha es muy próxima. Para este tipo de evento debemos tener \n"
                             + "por lo menos 3 semanas para planificar. Ingrese nuevamente.");
                 }
-               // evento.setTipo("FIESTA INFANTIL");
+                // evento.setTipo("FIESTA INFANTIL");
                 System.out.println("¡Fecha válida!");
-                return "FIESTA INFANTIL";
+                return "FIESTA INFANTIL" + fecha1 + fecha2;
 
             case "3":
                 System.out.println("/**********************EVENTO FIESTA EMPRESARIAL******"
@@ -157,16 +184,16 @@ public class Cliente extends Usuario {
                             + "por lo menos 2 meses para planificar. Ingrese nuevamente.");
                 }
                 //evento.setTipo("FIESTA EMPRESARIAL");
-                                System.out.println("¡Fecha válida!");
+                System.out.println("¡Fecha válida!");
 
-                return "FIESTA EMPRESARIAL";
-              
+                return "FIESTA EMPRESARIAL" + fecha1 + fecha2;
+
             default:
                 System.out.println("Opcion invalida");
                 break;
 
-        }    
-                        return "Invalido";
+        }
+        return "Invalido";
 
     }
 
@@ -175,7 +202,6 @@ public class Cliente extends Usuario {
                 + "****************/\n/*\t\t\t\t\t\t\t\t\t\b\b*/\n/****************"
                 + "*******************************************/");
         Evento evento = new Evento();
-        //int codigoPago, int codigoEvento, double totalPagar, Estado estado, int codigoTransaccion, Date fechaRegistro
         int codigo = evento.getID();
         int codigoT;
         System.out.println("Su orden con código " + codigo + "esta pendiente de pago");

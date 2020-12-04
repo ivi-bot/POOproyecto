@@ -57,7 +57,10 @@ public class Factura {
     public void setEstado(Estado estado) {
         this.estado = estado;
     }
-
+/**
+ * 
+ * @return retorna un codigo aleatorio para la factura
+ */
     private int generarID(){
         Random r = new Random();
         int n = r.nextInt(1000);

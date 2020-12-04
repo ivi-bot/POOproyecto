@@ -48,7 +48,10 @@ public class Opcional {
     public void setTipo(Adicional tipo) {
         this.tipo = tipo;
     }
-
+/**
+ * 
+ * @return Retorna  informacion del opcional elegido
+ */
     @Override
     public String toString() {
         return "Opcional{" +

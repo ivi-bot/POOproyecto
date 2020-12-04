@@ -26,21 +26,23 @@ public class Solicitud {
     private int numero;
     private final Cliente cliente;
     private final Planificador planificador;
-    private final Date fechaEvento;
+    private  Date fechaEvento;
     private final String tipoEvento;
-    private final Date fechaSolicitud;
+    private  Date fechaSolicitud;
     private Estado estadoSolicitud;
     private final double precioBase;
     private ArrayList<Integer> ids;
+    private  String fechaSolicitudS;
+    private  String fechaEventoS;
 
-    private ArrayList<Solicitud> solicitudes;
+    private ArrayList<Solicitud> solicitudes=new ArrayList<>();
 
-    public Solicitud(Cliente cliente, Planificador planificador, String tipoEvento, Date fechaSolicitud, Date fechaEvento) {
+    public Solicitud(Cliente cliente, Planificador planificador, String tipoEvento, String fechaSolicitudS, String fechaEventoS) {
         //this.numero = numero;
         this.cliente = cliente;
         this.planificador = planificador;
-        this.fechaSolicitud = fechaSolicitud;
-        this.fechaEvento = fechaEvento;
+        this.fechaSolicitudS = fechaSolicitudS;
+        this.fechaEventoS = fechaEventoS;
         this.estadoSolicitud = Estado.PENDIENTE;
         this.tipoEvento = tipoEvento;
         this.ID = generarCodigo2();
@@ -56,6 +58,22 @@ public class Solicitud {
 
     public int getID() {
         return ID;
+    }
+
+    public String getFechaSolicitudS() {
+        return fechaSolicitudS;
+    }
+
+    public void setFechaSolicitudS(String fechaSolicitudS) {
+        this.fechaSolicitudS = fechaSolicitudS;
+    }
+
+    public String getFechaEventoS() {
+        return fechaEventoS;
+    }
+
+    public void setFechaEventoS(String fechaEventoS) {
+        this.fechaEventoS = fechaEventoS;
     }
 
     public ArrayList<Solicitud> getSolicitudes() {
@@ -101,7 +119,10 @@ public class Solicitud {
     public void setNumero(int numero) {
         this.numero = numero;
     }
-
+/**
+ * 
+ * @return Formato del objeto cliente al guardarse en la lista
+ */
     @Override
     public String toString() {
         return cliente.nombre.toUpperCase() + cliente.apellido.toUpperCase() + 
@@ -110,14 +131,17 @@ public class Solicitud {
                fechaEvento ;
 
     }
+    /**
+     * Muestra mensaje del registro al cliente
+     */
     public void registro(){
         System.out.println( "/**********************SOLICITUD REGISTRADA******"
                 + "****************/\n/*\t\t\t\t\t\t\t\t\t\b\b*/\n/****************"
                 + "*******************************************/\nCLIENTE: "
-                + cliente.nombre.toUpperCase() + cliente.apellido.toUpperCase() + "\n"
-                + "PLANIFICADOR ASIGNADO: " + planificador.nombre + planificador.apellido + "\n"
-                + "FECHA DE REGISTRO: " + fechaSolicitud + "\n"
-                + "FECHA DEL EVENTO: " + fechaEvento + "\n\n" + "**Se ha registrado su solicitud, pronto el planificador se"
+                + cliente.nombre.toUpperCase() +" "+ cliente.apellido.toUpperCase() + "\n"
+                + "PLANIFICADOR ASIGNADO: " + planificador.nombre.toUpperCase() + " "+planificador.apellido.toUpperCase() + "\n"
+                + "FECHA DE REGISTRO: " + fechaSolicitudS + "\n"
+                + "FECHA DEL EVENTO: " + fechaEventoS + "\n\n" + "**Se ha registrado su solicitud, pronto el planificador se"
                 + "contactará con usted por teléfono o video conferencia para completar el proceso de recolección de datos");}
 
     public void setEstadoSolicitud(Estado estadoSolicitud) {

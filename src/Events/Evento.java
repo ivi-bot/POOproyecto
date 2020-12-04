@@ -23,7 +23,8 @@ public class Evento {
     protected Date horaFin;
     protected int capacidad;
     private final ArrayList<Integer> codes = new ArrayList<>();
-
+ protected String fechaEventoF;
+    protected String fechasolicitudF;
     public Evento(String tipo, Date fechaEvento, Planificador planificador, Cliente cliente, double precioBase, Estado estado, Date duracion, int numeroPersonas, int elementosAdicionales) {
         this.tipo = tipo;
         this.fechaEvento = fechaEvento;
@@ -37,10 +38,20 @@ public class Evento {
         this.ID = generarCodigo();
     }
 
-    public Evento() {
-        this.ID = generarCodigo();
+    public Evento(String tipo,String fechaEventoF, String fechasolicitudF){
+    this.tipo=tipo;
+    this.fechaEventoF=fechaEventoF;
+    this.fechasolicitudF=fechasolicitudF;
+    this.ID = generarCodigo();
 
     }
+
+    public Evento() {
+        this.ID = generarCodigo();
+    }
+    
+  
+    
 
     public String getTipo() {
         return tipo;
@@ -100,6 +111,22 @@ public class Evento {
 
     public Date getFechasolicitud() {
         return fechasolicitud;
+    }
+
+    public String getFechaEventoF() {
+        return fechaEventoF;
+    }
+
+    public void setFechaEventoF(String fechaEventoF) {
+        this.fechaEventoF = fechaEventoF;
+    }
+
+    public String getFechasolicitudF() {
+        return fechasolicitudF;
+    }
+
+    public void setFechasolicitudF(String fechasolicitudF) {
+        this.fechasolicitudF = fechasolicitudF;
     }
 
     public void setFechasolicitud(Date fechasolicitud) {

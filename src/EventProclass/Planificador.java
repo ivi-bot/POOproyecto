@@ -18,6 +18,7 @@ public class Planificador extends Usuario {
     private List<Evento> eventos = new ArrayList<>();
     private List<Solicitud> solicitudes = new ArrayList<>();
     private List<Factura> ordendepagos = new ArrayList<>();
+    
 
     public Planificador(List<Evento> eventos, ArrayList<Solicitud> solicitudes, List<Factura> ordendepagos, String nombre, String apellido, String nomUsuario, String contraseña, char tipo) {
         super(nombre, apellido, nomUsuario, contraseña, tipo);
@@ -42,10 +43,7 @@ public class Planificador extends Usuario {
     /**
      * Este metodo permite consultar todas la solicitudes que tiene cada planificar y no retorna nada.
      */
-    
-
-    //Esta funcion permite consultar todas la solicitudes que tiene cada planificador y no retorna nada.
-    public void consultarSolicitudes() {
+        public void consultarSolicitudes() {
         int cont = 1;
         System.out.println("/**********************SOLICITUDES PENDIENTES********"
                 + "****************/\n/*\t\t\t\t\t\t\t\t\t\b\b\t\t\t\t\t\t\t\t\t\t*/\n/****************"
@@ -55,19 +53,14 @@ public class Planificador extends Usuario {
             cont++;
         }
     }
-/**
- * 
- * @param ID recibe el codigo de la factura que  previamente fue generado para poder 
- * registrar el evento
- */
-  
-    //Esta Funcion le permite al planificador registrar un evento que el usuario a solicitado
-    public void registrarEvento() {
+      public void registrarEvento() {
         System.out.println("Ingrese el id de la solicitud: ");
-        int ID = sc.nextInt();
+        Scanner sc2=new Scanner(System.in);
+        int ID = sc2.nextInt();
         System.out.println("/**********************REGISTRO DE EVENTOS********"
                 + "****************/\n/*\t\t\t\t\t\t\t\t\t\b\b\t\t\t\t\t\t\t\t\t\t*/\n/****************"
                 + "****************************************************/");
+        
         for (Solicitud s : solicitudes) {
             if (s.getID() == ID) {
                 System.out.println("DATOS: ");
@@ -81,11 +74,11 @@ public class Planificador extends Usuario {
                 String hIni, hFin;
                 int cap;
                 System.out.print("Hora Inicio: ");
-                hIni = sc.nextLine();
+                hIni = sc2.nextLine();
                 System.out.print("Hora Fin:");
                 hFin = sc.nextLine();
                 System.out.print("Capacidad: ");
-                cap = sc.nextInt();
+                cap = sc2.nextInt();
                 String op;
                 List<Opcional> elemAdi = this.registrarAdicionales();
                 double totalAdi = 0;
@@ -122,7 +115,7 @@ public class Planificador extends Usuario {
                 System.out.print("El pago de este evento se ha realizado el: " + odp.getFechaRegistro());
                 System.out.print("Desea aprobar este pago? (S/N): ");
                 String o = sc.nextLine();
-                if(o.equals("S")){
+                if(o.equalsIgnoreCase("S")){
                     System.out.println("El pago se ha aprobado.");
                     odp.setEstado(Estado.APROBADO);
                     eventos.stream().filter(e -> e.getID() == odp.getCodigoEvento()).forEach(evento -> evento.setEstado(Estado.APROBADO));

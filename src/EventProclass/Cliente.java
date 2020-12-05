@@ -49,14 +49,17 @@ public class Cliente extends Usuario {
      *
      */
     private boolean validarTiempo(int tiempo) {
-
         Date currentDate = new Date();
         String fechaActual = dateFormat.format(currentDate);
         System.out.println(dateFormat.format(currentDate));
-        System.out.println("Ingrese la fecha deseada con el siguiente formato: dd/MM/yyyy");
+        System.out.println("Ingrese la fecha deseada con el siguiente formato: dd/MM/yyyy\nPsdt. No ingrese fechas anteriores a la actual, su registro será invalido");
         System.out.print("Fecha del evento: ");
         Scanner t = new Scanner(System.in);
         String fechaUsuario = t.nextLine();
+            while(!fechaUsuario.contains("/")){
+            System.out.print("Por favor ingrese la fecha deseada con el siguiente formato: dd/MM/yyyy\nSi tiene conflicto aqui un ejemplo:04/04/2012");
+            fechaUsuario = t.nextLine();
+            }    
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.DAY_OF_MONTH, Integer.parseInt(fechaActual.substring(0, 2)));
         cal.set(Calendar.MONTH, Integer.parseInt(fechaActual.substring(3, fechaActual.length() - 5)));
@@ -68,7 +71,6 @@ public class Cliente extends Usuario {
         Date secondDate = cal.getTime();
         long difD = secondDate.getTime() - firstDate.getTime();
         System.out.println("Days: " + difD / 1000 / 60 / 60 / 24);
-
         try {
             Calendar inicio = new GregorianCalendar();
             Calendar fin = new GregorianCalendar();
@@ -76,14 +78,12 @@ public class Cliente extends Usuario {
             fin.setTime(new SimpleDateFormat("dd/MM/yyyy").parse(fechaUsuario));
             int difA = fin.get(Calendar.YEAR) - inicio.get(Calendar.YEAR);
             int difM = difA * 12 + fin.get(Calendar.MONTH) - inicio.get(Calendar.MONTH);
-            System.out.println(difM);
+           // System.out.println(difM);
 
             switch (tiempo) {
                 case 1:
-                    if (difM >= 10) {
-                        // Evento evento = new Evento("BODA", secondDate, currentDate);             
-//evento.setFechaEvento(secondDate);
-                        fecha1 = dateFormat.format(secondDate);
+                    if (difM >= 10) {              
+                        fecha1 = fechaUsuario;
                         fecha2 = fechaActual;
                         return true;
                     }
@@ -91,55 +91,23 @@ public class Cliente extends Usuario {
                     break;
                 case 2:
                     if (difD >= 21) {
-                        // Evento evento = new Evento("Fiesta Infantil", secondDate, currentDate);
-                        fecha1 = dateFormat.format(secondDate);
+                        fecha1 = fechaUsuario;
                         fecha2 = fechaActual;
-                        //evento.setFechaEvento(secondDate);
                         return true;
                     }
                     break;
                 case 3:
                     if (difM >= 2) {
-                        // Evento evento = new Evento("Fiesta Empresarial", secondDate, currentDate);
                         fecha1 = dateFormat.format(secondDate);
                         fecha2 = fechaActual;
-//evento.setFechaEvento(secondDate);
                         return true;
                     }
-
                     break;
             }
-
         } catch (ParseException ex) {
-
         }
         return false;
-        // evento.setFechasolicitud(fechaActual);
-//        switch (i) {
-//            case 1:
-//                if (difM >= 10) {
-//                    //       evento.setFechaEvento(fecha_usuario);
-//                    return true;
-//                }
-//                ;
-//                break;
-//            case 2:
-//                if (difD >= 21) {
-//                    //     evento.setFechaEvento(fecha_usuario);
-//                    return true;
-//                }
-//                break;
-//            case 3:
-//                if (difM >= 2) {
-//                    //    evento.setFechaEvento(fecha_usuario);
-//                    return true;
-//                }
-//
-//                break;
-//        }
-//        return false;
     }
-
     /**
      *
      * @return Retorna el tipo de evento que creo el usuario
@@ -153,9 +121,15 @@ public class Cliente extends Usuario {
         System.out.println("TIPO DE EVENTO (Elija)\n1.Boda\n2.Fiesta Infantil\n3.Fiesta Empresarial");
         System.out.print("Seleccione: ");
         opcion_usuario = sc.nextLine();
-
+        ArrayList<String> opcionesV2=new ArrayList<>();
+            opcionesV2.add("1");
+            opcionesV2.add("2");
+            opcionesV2.add("3");
+            while(!opcionesV2.contains(opcion_usuario)){
+            System.out.print("Escriba una opcion correcta:");
+            opcion_usuario = sc.nextLine();
+            }   
         switch (opcion_usuario) {
-
             case "1":
                 System.out.println("/**********************EVENTO BODA******"
                         + "****************/");
@@ -206,15 +180,18 @@ public class Cliente extends Usuario {
         System.out.println("Su orden con código " + ID + " esta pendiente de pago");
         System.out.print("¿Desea registrar pago ahora? (S/N): ");
         Scanner sc1=new Scanner(System.in);
-        String op = sc1.nextLine();
-//        while (op != "S" || op != "N") {
-//            System.out.println("Ingrese una opcion correcta: ");
-//             op = sc1.nextLine();
-//
-//        }
-        if (op == "S") {
+        String op = sc1.nextLine().toUpperCase();
+    ArrayList<String> opcionesV1=new ArrayList<>();
+            opcionesV1.add("S");
+            opcionesV1.add("N");
+            while(!opcionesV1.contains(op)){
+            System.out.print("Escriba una opcion correcta:");
+            op = sc.nextLine();
+            }
+        if (op.equalsIgnoreCase("S")) {
             System.out.print("Ingrese el codigo de la transacción: ");
-            int codigoT = sc.nextInt();
+            int codigoT = sc1.nextInt();
+            
             System.out.println("Listo, se ha registrado. Cuando el planificador valide el pago se pondrá en contacto con usted");
         } else {
             System.out.println("Gracias");

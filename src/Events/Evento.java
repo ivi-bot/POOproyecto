@@ -24,6 +24,7 @@ public class Evento {
     private final ArrayList<Integer> codes = new ArrayList<>();
     protected String fechaEventoF;
     protected String fechasolicitudF;
+    
     public Evento(String tipo, Date fechaEvento, Planificador planificador, Cliente cliente, double precioBase, Estado estado, Date duracion, int numeroPersonas) {
         this.tipo = tipo;
         this.fechaEvento = fechaEvento;
@@ -135,7 +136,7 @@ public class Evento {
     }
 
     public void mostrarPromociones(){
-        System.out.println("Some Code!");
+        System.out.println("Recuerde estas promociones");
     }
     //Genera un numero aleatorio y se le asigna el valor a la variable de instancia ID, este valor es unico
     //y no retorna nada.

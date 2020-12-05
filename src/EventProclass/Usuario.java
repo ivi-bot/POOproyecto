@@ -20,7 +20,6 @@ public class Usuario {
     protected String contraseña;
     protected char tipo;
     protected Scanner sc;
-    //protected String opcion_usuario;
 
     public Usuario(String nombre, String apellido, String nomUsuario, String contraseña, char tipo) {
         this.nombre = nombre;
@@ -29,20 +28,11 @@ public class Usuario {
         this.contraseña = contraseña;
         this.tipo = tipo;
     }
-    
     public Usuario(String nombre, String apellido){
      this.nombre = nombre;
 
     }
-//    public Usuario() {
-//        this.nombre = nombre;
-//        this.apellido = apellido;
-//    
-//    }
-//    
-//    
-    
-    
+   
     public void mostrarInformacion(){
         System.out.println("Bienvenid@ "+this.nombre+" "+this.apellido+"\n");
     }
@@ -86,13 +76,8 @@ public class Usuario {
     public void setTipo(char tipo) {
         this.tipo = tipo;
     }
-
-
-
     @Override
     public String toString() {
         return  nombre + ";"+ apellido + ";" + nomUsuario + ";" + contraseña + ";" + tipo ;
     }
-
-    
 }

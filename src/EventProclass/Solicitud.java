@@ -17,11 +17,9 @@ import java.util.Random;
 
 /**
  *
- * @author FERNAN
+ * @author 
  */
 public class Solicitud {
-    //Atributos
-
     private  int ID;
     private int numero;
     private final Cliente cliente;
@@ -34,9 +32,7 @@ public class Solicitud {
     private ArrayList<Integer> ids;
     private  String fechaSolicitudS;
     private  String fechaEventoS;
-
     private ArrayList<Solicitud> solicitudes=new ArrayList<>();
-
     public Solicitud(Cliente cliente, Planificador planificador, String tipoEvento, String fechaSolicitudS, String fechaEventoS) {
         //this.numero = numero;
         this.cliente = cliente;
@@ -53,69 +49,52 @@ public class Solicitud {
         } else {
             this.precioBase = 300;
         }
-
     }
-
     public int getID() {
         return ID;
     }
-
     public String getFechaSolicitudS() {
         return fechaSolicitudS;
     }
-
     public void setFechaSolicitudS(String fechaSolicitudS) {
         this.fechaSolicitudS = fechaSolicitudS;
     }
-
     public String getFechaEventoS() {
         return fechaEventoS;
     }
-
     public void setFechaEventoS(String fechaEventoS) {
         this.fechaEventoS = fechaEventoS;
     }
-
     public ArrayList<Solicitud> getSolicitudes() {
         return solicitudes;
     }
-
     public void setSolicitudes(ArrayList<Solicitud> solicitudes) {
         this.solicitudes = solicitudes;
     }
-
     public int getNumero() {
         return numero;
     }
-
     public Cliente getCliente() {
         return cliente;
     }
-
     public Planificador getPlanificador() {
         return planificador;
     }
-
     public Date getFechaSolicitud() {
         return fechaSolicitud;
     }
-
     public Estado getEstadoSolicitud() {
         return estadoSolicitud;
     }
-
     public String getTipoEvento() {
         return tipoEvento;
     }
-
     public Date getFechaEvento() {
         return fechaEvento;
     }
-
     public double getPrecioBase() {
         return precioBase;
     }
-
     public void setNumero(int numero) {
         this.numero = numero;
     }
@@ -129,7 +108,6 @@ public class Solicitud {
                  planificador.nombre.toUpperCase()+ planificador.getApellido().toUpperCase()+
                fechaSolicitudS + "\n"+
                fechaEventoS ;
-
     }
     /**
      * Muestra mensaje del registro al cliente
@@ -143,7 +121,6 @@ public class Solicitud {
                 + "FECHA DE REGISTRO: " + fechaSolicitudS + "\n"
                 + "FECHA DEL EVENTO: " + fechaEventoS + "\n\n" + "**Se ha registrado su solicitud, pronto el planificador se"
                 + " contactará con usted por teléfono o video conferencia para completar el proceso de recolección de datos");}
-
     public void setEstadoSolicitud(Estado estadoSolicitud) {
         this.estadoSolicitud = estadoSolicitud;
     }

@@ -27,7 +27,8 @@ public class FiestaEmpresarial extends Evento{
 
     @Override
     public void mostrarPromociones(){
-    System.out.println("Promocion (Fiesta Empresarial)"); 
+    System.out.println("El transporte al lugar del evento es gratuito en un próximo evento, "
+            + "si lo organizan con el mismo planificador"); 
     }
 
 }

@@ -125,10 +125,10 @@ public class Solicitud {
  */
     @Override
     public String toString() {
-        return cliente.nombre.toUpperCase() + cliente.apellido.toUpperCase() + 
-                planificador.nombre + planificador.apellido +
-                fechaSolicitud + 
-               fechaEvento ;
+        return cliente.nombre.toUpperCase() + " "+cliente.apellido.toUpperCase() +"\n"+ 
+                 planificador.nombre.toUpperCase()+ planificador.getApellido().toUpperCase()+
+               fechaSolicitudS + "\n"+
+               fechaEventoS ;
 
     }
     /**
@@ -139,10 +139,10 @@ public class Solicitud {
                 + "****************/\n/*\t\t\t\t\t\t\t\t\t\b\b*/\n/****************"
                 + "*******************************************/\nCLIENTE: "
                 + cliente.nombre.toUpperCase() +" "+ cliente.apellido.toUpperCase() + "\n"
-                + "PLANIFICADOR ASIGNADO: " + planificador.nombre.toUpperCase() + " "+planificador.apellido.toUpperCase() + "\n"
+                + "PLANIFICADOR ASIGNADO: " + planificador.nombre.toUpperCase() + " "+planificador.getApellido().toUpperCase() + "\n"
                 + "FECHA DE REGISTRO: " + fechaSolicitudS + "\n"
                 + "FECHA DEL EVENTO: " + fechaEventoS + "\n\n" + "**Se ha registrado su solicitud, pronto el planificador se"
-                + "contactará con usted por teléfono o video conferencia para completar el proceso de recolección de datos");}
+                + " contactará con usted por teléfono o video conferencia para completar el proceso de recolección de datos");}
 
     public void setEstadoSolicitud(Estado estadoSolicitud) {
         this.estadoSolicitud = estadoSolicitud;

@@ -26,13 +26,13 @@ import java.util.Scanner;
  */
 public class interfazEventpro {
 
-
     private ArrayList<String> usuarios = Archivo.LeeFichero("usuarios.txt");
     String opcion;
+    Planificador P2;
 
-
-
+    Evento e;
     String opcion2;
+        int id;
 
     /**
      * Inicio del sistema
@@ -47,8 +47,6 @@ public class interfazEventpro {
 //        Cliente cliente = new Cliente();
 //        Planificador p = new Planificador();
 //        Evento evento = new Evento();
-
-
         usuarios = Archivo.LeeFichero("usuarios.txt");
 
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++ \n\n \t\tBIENVENIDO AL SISTEMA \n\n"
@@ -64,7 +62,6 @@ public class interfazEventpro {
         ArrayList<String> apellidoPlanificador = new ArrayList<>();
         ArrayList<Character> tipo = new ArrayList<>();
         ArrayList<String> apellidoUsuario = new ArrayList<>();
-
 
         for (int i = 0; i < usuarios.size(); i++) {
             String[] datos = usuarios.get(i).split(";");
@@ -96,15 +93,19 @@ public class interfazEventpro {
         Usuario usuario = new Usuario(nombres.get(indiceUsuario), apellidoUsuario.get(indiceUsuario), nomUsuarios.get(indiceUsuario), contraseñas.get(indiceUsuario), tipo.get(indiceUsuario));
         int planificador = (int) Math.random();
         Cliente cliente = new Cliente(nombres.get(indiceUsuario), apellidoUsuario.get(indiceUsuario), nomUsuarios.get(indiceUsuario), contraseñas.get(indiceUsuario), tipo.get(indiceUsuario));
-        Planificador p = new Planificador(planificadores.get(planificador), apellidoPlanificador.get(planificador));
-        int id;
+        ArrayList<Solicitud> s = new ArrayList<Solicitud>();
+
+        Planificador p = new Planificador(s,planificadores.get(planificador), apellidoPlanificador.get(planificador), nomUsuarios.get(indiceUsuario), contraseñas.get(indiceUsuario), tipo.get(indiceUsuario));
+
+
+
         //if (usuarios.stream().filter(n -> n.startsWith(usuario.getNomUsuario())).anyMatch(s -> s.endsWith(";C"))) {
         if (String.valueOf(tipo.get(indiceUsuario)).equalsIgnoreCase("C")) {
             System.out.println("1. Solicitar planificación de evento\n2. Registrar pago Evento\n3. Salir");
             System.out.print("Escoja una opcion:");
             opcion = sc.nextLine();
             while (Integer.parseInt(opcion) != 3) {
-                if (Integer.parseInt(opcion)  == 1) {
+                if (Integer.parseInt(opcion) == 1) {
                     String tipoEvento = cliente.crearSolicitud();
                     System.out.println("¿Desea registrar su solicitud? S/N");
                     System.out.println(tipoEvento);
@@ -114,11 +115,13 @@ public class interfazEventpro {
                         System.out.println(evento.getTipo());
                         Solicitud solicitud = new Solicitud(cliente, p, evento.getTipo(), evento.getFechasolicitudF(), evento.getFechaEventoF());
                         solicitud.setEstadoSolicitud(Estado.PENDIENTE);
-
                         Archivo.EscribirArchivo("solicitudes.txt", solicitud.getID() + "," + cliente.getNombre() + "," + p.getNombre() + "," + solicitud.getFechaSolicitudS() + "," + solicitud.getFechaEventoS() + "," + solicitud.getEstadoSolicitud());
-                        solicitud.getSolicitudes().add(solicitud);
+                        // solicitud.getSolicitudes().add(solicitud);
+                        s.add(solicitud);
+                        System.out.println(s);
                         solicitud.registro();
-                        id = evento.getID();
+                        id=evento.getID();
+                        
                     } else {
                         System.out.println("¡Gracias por visitarnos!");
                     }
@@ -153,16 +156,20 @@ public class interfazEventpro {
 //                        System.out.println("¡Gracias por visitarnos!");
 //                    }
                 } else {
-                    cliente.RegistrarPago();
+                    cliente.RegistrarPago(id);
                 }
-                opcion = "3";
+                            System.out.print("Escoga otra opcion si desea continuar+\n");
+
+                 System.out.println("1. Solicitar planificación de evento\n2. Registrar pago Evento\n3. Salir");
+            opcion = sc.nextLine();;
 
             }
+
         } else {
+
             System.out.println("1. Consultar solicitudes pendientes.\n 2. Registrar Evento.\n3. Confirmar Evento.\n4. Consultar Evento\n5. Salir");
             System.out.print("Escoja una opcion:");
             opcion = sc.nextLine();
-            sc.nextLine();
             while (Integer.parseInt(opcion) != 5) {
                 switch (Integer.parseInt(opcion)) {
                     case 1:
@@ -171,7 +178,7 @@ public class interfazEventpro {
                         break;
                     case 2:
 
-                      p.registrarEvento();
+                        p.registrarEvento();
 
                         break;
                     case 3:
@@ -186,6 +193,7 @@ public class interfazEventpro {
                         break;
 
                 }
+                opcion = "5";
             }
 
         }

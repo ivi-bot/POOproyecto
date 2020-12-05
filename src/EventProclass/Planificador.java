@@ -16,10 +16,10 @@ import java.util.List;
 public class Planificador extends Usuario {
     private static final SimpleDateFormat dateFormatHora = new SimpleDateFormat("HH:mm");
     private List<Evento> eventos;
-    private List<Solicitud> solicitudes;
+    private ArrayList<Solicitud> solicitudes;
     private List<Factura> ordendepagos;
 
-    public Planificador(List<Evento> eventos, List<Solicitud> solicitudes, List<Factura> ordendepagos, String nombre, String apellido, String nomUsuario, String contraseña, char tipo) {
+    public Planificador(List<Evento> eventos, ArrayList<Solicitud> solicitudes, List<Factura> ordendepagos, String nombre, String apellido, String nomUsuario, String contraseña, char tipo) {
         super(nombre, apellido, nomUsuario, contraseña, tipo);
         this.eventos = eventos;
         this.solicitudes = solicitudes;
@@ -30,11 +30,14 @@ public class Planificador extends Usuario {
             super(nombre, apellido, nomUsuario, contraseña, tipo);
 
     }
+     public Planificador(ArrayList<Solicitud> solicitudes,String nombre, String apellido, String nomUsuario, String contraseña, char tipo){
+            super(nombre, apellido, nomUsuario, contraseña, tipo);
+        this.solicitudes = solicitudes;
+
+    }
     public Planificador(String nombre, String apellido){
                 super(nombre, apellido);
 
-    
-    
     }
     /**
      * Este metodo permite consultar todas la solicitudes que tiene cada planificar y no retorna nada.
@@ -46,7 +49,8 @@ public class Planificador extends Usuario {
         System.out.println("/**********************SOLICITUDES PENDIENTES******"
                 + "****************/\n/*\t\t\t\t\t\t\t\t\t\b\b*/\n/****************"
                 + "*******************************************/");
-        solicitudes.forEach(s -> System.out.println(s.getID() + " - " +s.getFechaEvento()));
+        System.out.println(solicitudes.size());
+// solicitudes.forEach(s -> System.out.println(s.getID() + " - " +s.getFechaEvento()));
     }
 /**
  * 
@@ -178,7 +182,7 @@ public class Planificador extends Usuario {
         return solicitudes;
     }
 
-    public void setSolicitudes(List<Solicitud> solicitudes) {
+    public void setSolicitudes(ArrayList<Solicitud> solicitudes) {
         this.solicitudes = solicitudes;
     }
 

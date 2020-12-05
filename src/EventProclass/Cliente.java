@@ -5,12 +5,14 @@
  */
 package EventProclass;
 
+import Archivos.Archivo;
 import Events.Estado;
 import Events.Evento;
 import java.util.Scanner;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -197,22 +199,22 @@ public class Cliente extends Usuario {
 
     }
 
-    public void RegistrarPago() {
+    public void RegistrarPago(int ID) {
         System.out.println("/**********************REGISTRO PAGO******"
                 + "****************/\n/*\t\t\t\t\t\t\t\t\t\b\b*/\n/****************"
                 + "*******************************************/");
-        Evento evento = new Evento();
-        int codigo = evento.getID();
-        int codigoT;
-        System.out.println("Su orden con código " + codigo + "esta pendiente de pago");
+        System.out.println("Su orden con código " + ID + " esta pendiente de pago");
         System.out.print("¿Desea registrar pago ahora? (S/N): ");
-        String op = sc.nextLine();
-        while (op != "S" || op != "N") {
-            System.out.println("Ingrese una opcion correcta: ");
-        }
+        Scanner sc1=new Scanner(System.in);
+        String op = sc1.nextLine();
+//        while (op != "S" || op != "N") {
+//            System.out.println("Ingrese una opcion correcta: ");
+//             op = sc1.nextLine();
+//
+//        }
         if (op == "S") {
             System.out.print("Ingrese el codigo de la transacción: ");
-            codigoT = sc.nextInt();
+            int codigoT = sc.nextInt();
             System.out.println("Listo, se ha registrado. Cuando el planificador valide el pago se pondrá en contacto con usted");
         } else {
             System.out.println("Gracias");

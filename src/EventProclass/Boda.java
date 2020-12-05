@@ -30,7 +30,8 @@ public class Boda extends Evento{
 
     @Override
     public void mostrarPromociones() {
-        System.out.println("Promocion (Boda)");
+        System.out.println("Los novios tendrán un 25% de descuento si compran sus"
+                + "tickets de luna de miel en la aereolínea LATAM");
     }
 
 }

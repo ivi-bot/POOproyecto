@@ -51,8 +51,8 @@ public class Cliente extends Usuario {
     private boolean validarTiempo(int tiempo) {
         Date currentDate = new Date();
         String fechaActual = dateFormat.format(currentDate);
-        System.out.println(dateFormat.format(currentDate));
-        System.out.println("Ingrese la fecha deseada con el siguiente formato: dd/MM/yyyy\nPsdt. No ingrese fechas anteriores a la actual, su registro será invalido");
+       // System.out.println(dateFormat.format(currentDate));
+        System.out.println("Ingrese la fecha deseada con el siguiente formato: dd/MM/yyyy\nPsdt. No ingrese fechas anteriores a la actual, su registro será inválido");
         System.out.print("Fecha del evento: ");
         Scanner t = new Scanner(System.in);
         String fechaUsuario = t.nextLine();
@@ -70,7 +70,7 @@ public class Cliente extends Usuario {
         cal.set(Calendar.YEAR, Integer.parseInt(fechaUsuario.substring(6, fechaUsuario.length())));
         Date secondDate = cal.getTime();
         long difD = secondDate.getTime() - firstDate.getTime();
-        System.out.println("Days: " + difD / 1000 / 60 / 60 / 24);
+      //  System.out.println("Days: " + difD / 1000 / 60 / 60 / 24);
         try {
             Calendar inicio = new GregorianCalendar();
             Calendar fin = new GregorianCalendar();

@@ -7,18 +7,16 @@ import Events.Evento;
 import java.util.*;
 import java.text.SimpleDateFormat;
 
-
 /**
  *
  * @author
  */
-
 public class Planificador extends Usuario {
+
     private static final SimpleDateFormat dateFormatHora = new SimpleDateFormat("HH:mm");
     private List<Evento> eventos = new ArrayList<>();
     private List<Solicitud> solicitudes = new ArrayList<>();
     private List<Factura> ordendepagos = new ArrayList<>();
-    
 
     public Planificador(List<Evento> eventos, ArrayList<Solicitud> solicitudes, List<Factura> ordendepagos, String nombre, String apellido, String nomUsuario, String contraseña, char tipo) {
         super(nombre, apellido, nomUsuario, contraseña, tipo);
@@ -26,167 +24,186 @@ public class Planificador extends Usuario {
         this.solicitudes = solicitudes;
         this.ordendepagos = ordendepagos;
     }
-    
-    public Planificador(String nombre, String apellido, String nomUsuario, String contraseña, char tipo){
-            super(nombre, apellido, nomUsuario, contraseña, tipo);
+
+    public Planificador(String nombre, String apellido, String nomUsuario, String contraseña, char tipo) {
+        super(nombre, apellido, nomUsuario, contraseña, tipo);
 
     }
-     public Planificador(ArrayList<Solicitud> solicitudes,String nombre, String apellido, String nomUsuario, String contraseña, char tipo){
-            super(nombre, apellido, nomUsuario, contraseña, tipo);
-            this.solicitudes = solicitudes;
+
+    public Planificador(ArrayList<Solicitud> solicitudes, String nombre, String apellido, String nomUsuario, String contraseña, char tipo) {
+        super(nombre, apellido, nomUsuario, contraseña, tipo);
+        this.solicitudes = solicitudes;
 
     }
-    public Planificador(String nombre, String apellido){
+
+    public Planificador(String nombre, String apellido) {
         super(nombre, apellido);
 
     }
+
     /**
-     * Este metodo permite consultar todas la solicitudes que tiene cada planificar y no retorna nada.
+     * Este metodo permite consultar todas la solicitudes que tiene cada
+     * planificar y no retorna nada.
      */
-        public void consultarSolicitudes() {
+    public void consultarSolicitudes() {
         int cont = 1;
         System.out.println("/**********************SOLICITUDES PENDIENTES********"
                 + "****************/\n/*\t\t\t\t\t\t\t\t\t\b\b\t\t\t\t\t\t\t\t\t\t*/\n/****************"
                 + "****************************************************/");
-        for(Solicitud s: solicitudes){
+        for (Solicitud s : solicitudes) {
             System.out.println(cont + ". " + s.getID() + " - " + s.getFechaEvento());
             cont++;
         }
     }
 
-
-/**
- * 
- * ID de La Solictud recibe el codigo de la factura que  previamente fue generado para poder
- * registrar el evento
- */
-  
+    /**
+     *
+     * ID de La Solictud recibe el codigo de la factura que previamente fue
+     * generado para poder registrar el evento
+     */
     //Esta Funcion le permite al planificador registrar un evento que el usuario a solicitado
     public void registrarEvento() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Ingrese el id de la solicitud: ");
-        Scanner sc2=new Scanner(System.in);
-        int ID = sc2.nextInt();
-        System.out.println("/**********************REGISTRO DE EVENTOS********"
-                + "****************/\n/*\t\t\t\t\t\t\t\t\t\b\b\t\t\t\t\t\t\t\t\t\t*/\n/****************"
-                + "****************************************************/");
+        int ID = sc.nextInt();
+        System.out.println("/*******REGISTRO DE EVENTOS***"
+                + "*****/\n/\t\t\t\t\t\t\t\t\t\b\b\t\t\t\t\t\t\t\t\t\t*/\n/******"
+                + "******************/");
         sc.nextLine();
-        for (Solicitud s : solicitudes) {
-            if (s.getID() == ID) {
-                System.out.println("DATOS: ");
-                System.out.println("CLIENTE: " + s.getCliente() + "\nPLANIFICADOR ASIGNADO: " + this.getApellido()
-                        + " " + this.nombre + "\nFECHA DE REGISTRO:  " + s.getFechaSolicitud() + "\nTIPO DE EVENTO: " + s.getTipoEvento()
-                        + "\nFECHA DEL EVENTO: " + s.getFechaEvento() + "\nPRECIO BASE: " + s.getPrecioBase());
-                //anadirEvento(s.getEvento());
-                System.out.println("\n\n/**********************REGISTRO DE DATOS DEL EVENTOS******"
-                        + "****************/\n/*\t\t\t\t\t\t\t\t\t\b\b*/\n/****************"
-                        + "*******************************************/");
-                String hIni, hFin;
-                int cap;
-                System.out.print("Hora Inicio: ");
-                hIni = sc2.nextLine();
-                System.out.print("Hora Fin:");
-                hFin = sc.nextLine();
-                System.out.print("Capacidad: ");
-                cap = sc2.nextInt();
-                String op;
-                List<Opcional> elemAdi = this.registrarAdicionales();
-                double totalAdi = 0;
-                for (Opcional o : elemAdi) {
-                    totalAdi += o.getValor();
-                    Archivo.EscribirArchivo("src/Archivos/adicionales.txt", o.toString());
+        if (solicitudes.size() >= 1) {
+            for (Solicitud s : solicitudes) {
+                if (s.getID() == ID) {
+                    System.out.println("DATOS: ");
+                    System.out.println("CLIENTE: " + s.getCliente() + "\nPLANIFICADOR ASIGNADO: " + this.getApellido()
+                            + " " + this.nombre + "\nFECHA DE REGISTRO:  " + s.getFechaSolicitud() + "\nTIPO DE EVENTO: " + s.getTipoEvento()
+                            + "\nFECHA DEL EVENTO: " + s.getFechaEvento() + "\nPRECIO BASE: " + s.getPrecioBase());
+                    //anadirEvento(s.getEvento());
+                    System.out.println("\n\n/*******REGISTRO DE DATOS DEL EVENTOS***"
+                            + "*****/\n/\t\t\t\t\t\t\t\t\t\b\b*/\n/******"
+                            + "***************/");
+                    String hIni, hFin;
+                    int cap;
+                    System.out.print("Hora Inicio: ");
+                    hIni = sc.nextLine();
+                    System.out.print("Hora Fin:");
+                    hFin = sc.nextLine();
+                    System.out.print("Capacidad: ");
+                    cap = sc.nextInt();
+                    String op;
+                    List<Opcional> elemAdi = this.registrarAdicionales();
+                    double totalAdi = 0;
+                    for (Opcional o : elemAdi) {
+                        totalAdi += o.getValor();
+                        Archivo.EscribirArchivo("src/Archivos/adicionales.txt", o.toString());
+                    }
+                    double costototal = totalAdi + s.getPrecioBase();
+                    System.out.println("El costo totol de evento sera: " + costototal + "dolares.");
+                    s.setEstadoSolicitud(Estado.APROBADO);
+                    Evento e;
+                    if (s.getTipoEvento().equals("Boda")) {
+                        e = registrarBoda(s.getCliente(), s.getPlanificador(), s.getFechaEvento(), s.getFechaSolicitud(), s.getTipoEvento(), cap);
+                    } else if (s.getTipoEvento().equals("Fiesta Empresarial")) {
+                        e = registraFiestaEmpresarial(s.getCliente(), s.getPlanificador(), s.getFechaEvento(), s.getFechaSolicitud(), s.getTipoEvento(), cap);
+                    } else {
+                        e = registraFiestaInfantil(s.getCliente(), s.getPlanificador(), s.getFechaEvento(), s.getFechaSolicitud(), s.getTipoEvento(), cap);
+                    }
+                    anadirEvento(e);
+                    Factura odp = new Factura(s.getNumero(), e.getID(), costototal, Estado.PENDIENTE, s.getID(), new Date());
+                    String linea = e.getID() + "," + s.getCliente().getNombre() + "," + e.getTipo() + "," + e.getFechaEvento() + "," + hIni + "," + hFin + "," + cap + "," + this.apellido + "," + e.getEstado();
+                    Archivo.EscribirArchivo("src/Archivos/eventos.txt", linea);
                 }
-                double costototal = totalAdi + s.getPrecioBase();
-                System.out.println("El costo totol de evento sera: " + costototal + "dolares.");
-                s.setEstadoSolicitud(Estado.APROBADO);
-                Evento e;
-                if (s.getTipoEvento().equals("Boda")) {
-                    e = registrarBoda(s.getCliente(),s.getPlanificador(),s.getFechaEvento(),s.getFechaSolicitud(),s.getTipoEvento(),cap);
-                } else if (s.getTipoEvento().equals("Fiesta Empresarial")) {
-                    e = registraFiestaEmpresarial(s.getCliente(),s.getPlanificador(),s.getFechaEvento(),s.getFechaSolicitud(),s.getTipoEvento(),cap);
-                } else {
-                    e = registraFiestaInfantil(s.getCliente(),s.getPlanificador(),s.getFechaEvento(),s.getFechaSolicitud(),s.getTipoEvento(),cap);
-                }
-                anadirEvento(e);
-                Factura odp = new Factura(s.getNumero(),e.getID(),costototal,Estado.PENDIENTE,s.getID(),new Date());
-                String linea = e.getID()+","+s.getCliente().getNombre()+","+e.getTipo()+","+e.getFechaEvento()+","+hIni+","+hFin+","+cap+","+this.apellido+","+e.getEstado();
-                Archivo.EscribirArchivo("src/Archivos/eventos.txt",linea);
-            }
-        }//endfor
+            }//endfor
+        } else {
+            System.out.println("Usted No Tiene Solicitudes");
+        }
 
     }
-/**
- * Método que aprueba el pago o no
- */
+
+    /**
+     * Método que aprueba el pago o no
+     */
     public void confirmarEvento() {
         System.out.println("/**********************CONFIRMAR EVENTO******"
                 + "****************/\n/*\t\t\t\t\t\t\t\t\t\b\b*/\n/****************"
                 + "*******************************************/");
         int id;
         System.out.print("Ingrese el id de la orden de pago: ");
-        id = sc.nextInt();
-        for(Factura odp: ordendepagos){
-            if((odp.getId() == id)){
-                System.out.print("El pago de este evento se ha realizado el: " + odp.getFechaRegistro());
-                System.out.print("Desea aprobar este pago? (S/N): ");
-                String o = sc.nextLine();
-                if(o.equalsIgnoreCase("S")){
-                    System.out.println("El pago se ha aprobado.");
-                    odp.setEstado(Estado.APROBADO);
-                    eventos.stream().filter(e -> e.getID() == odp.getCodigoEvento()).forEach(evento -> evento.setEstado(Estado.APROBADO));
-                }else{
-                    System.out.println("No se ha aprobado el pago!");
+        Scanner sc3=new Scanner(System.in);
+        id = sc3.nextInt();
+        if (ordendepagos.size() >= 1) {
+            for (Factura odp : ordendepagos) {
+                if ((odp.getId() == id)) {
+                    System.out.print("El pago de este evento se ha realizado el: " + odp.getFechaRegistro());
+                    System.out.print("Desea aprobar este pago? (S/N): ");
+                    String o = sc.nextLine();
+                    if (o.equalsIgnoreCase("S")) {
+                        System.out.println("El pago se ha aprobado.");
+                        odp.setEstado(Estado.APROBADO);
+                        eventos.stream().filter(e -> e.getID() == odp.getCodigoEvento()).forEach(evento -> evento.setEstado(Estado.APROBADO));
+                    } else {
+                        System.out.println("No se ha aprobado el pago!");
+                    }
                 }
             }
         }
-
+        else {
+            System.out.println("Usted No Tiene facturas");
+        }
     }
+
     /**
      * Permite al planificador visualizar su lista de eventos
      */
 
     public void consultarEvento() {
-        int op, nBoda=0,nEmpre=0,nInfa=0;
+        int op, nBoda = 0, nEmpre = 0, nInfa = 0;
         System.out.println("/**********************CONSULTAR EVENTOS******"
                 + "****************/\n/*\t\t\t\t\t\t\t\t\t\b\b*/\n/****************"
                 + "*******************************************/");
         System.out.println("TIPOS DE EVENTOS \n1. Boda\n2. Fiesta Infantil \n3. Fiesta Empresarial");
-        System.out.print("Elija el tiepo de eventos que requiere consultar: ");
-        op = sc.nextInt();
-        for(Evento e: eventos){
-            if(e.getPlanificador().getApellido().equals(apellido)){
-                if(e instanceof Boda){
-                    nBoda++;
-                    Boda b = (Boda) e;
-                    b.mostrarPromociones();
-                } else if (e instanceof FiestaEmpresarial) {
-                    nEmpre++;
-                    FiestaEmpresarial fe = (FiestaEmpresarial) e;
-                    fe.mostrarPromociones();
-                }else{
-                    nInfa++;
-                    FiestaInfantil fi = (FiestaInfantil) e;
-                    fi.mostrarPromociones();
+        System.out.print("Elija el tipo de eventos que requiere consultar: ");
+         Scanner sc4=new Scanner(System.in);
+        op = sc4.nextInt();
+        if (eventos.size() >= 1) {
+            for (Evento e : eventos) {
+                if (e.getPlanificador().getApellido().equals(apellido)) {
+                    if (e instanceof Boda) {
+                        nBoda++;
+                        Boda b = (Boda) e;
+                        b.mostrarPromociones();
+                    } else if (e instanceof FiestaEmpresarial) {
+                        nEmpre++;
+                        FiestaEmpresarial fe = (FiestaEmpresarial) e;
+                        fe.mostrarPromociones();
+                    } else {
+                        nInfa++;
+                        FiestaInfantil fi = (FiestaInfantil) e;
+                        fi.mostrarPromociones();
+                    }
+                } else {
+                    System.out.println("Evento no encontrado!");
                 }
-            }else
-                System.out.println("Evento no encontrado!");
-        }
-        switch (op){
-            case 1:
-                //int n = (int) eventos.stream().filter(e -> e.getTipo().equals("Boda")).count();
-                System.out.println("\nTiene " + nBoda + "bodas asignadas.\n");
-                break;
-            case 2:
-                System.out.println("\nTiene " + nInfa + "fiestas infantiles asignadas.\n");
-                break;
-            case 3:
-                System.out.println("\nTiene " + nEmpre + "fiestas empresariales asignadas.\n");
-                break;
-            default:
-                System.out.println("Volviendo al Menu...");
-                break;
-        }
 
+            }
+        } else {
+            System.out.println("Usted No Tiene eventos");
+            switch (op) {
+                case 1:
+                    //int n = (int) eventos.stream().filter(e -> e.getTipo().equals("Boda")).count();
+                    System.out.println("\nTiene " + nBoda + "bodas asignadas.\n");
+                    break;
+                case 2:
+                    System.out.println("\nTiene " + nInfa + "fiestas infantiles asignadas.\n");
+                    break;
+                case 3:
+                    System.out.println("\nTiene " + nEmpre + "fiestas empresariales asignadas.\n");
+                    break;
+                default:
+                    System.out.println("Volviendo al Menu...");
+                    break;
+            }
+
+        }
     }
 
     public List<Solicitud> getSolicitudes() {
@@ -197,32 +214,32 @@ public class Planificador extends Usuario {
         this.solicitudes = solicitudes;
     }
 
-    public void anadirEvento(Evento evento){
+    public void anadirEvento(Evento evento) {
         eventos.add(evento);
     }
 
-    public void anadirSolicitud(Solicitud solicitud){
-        
+    public void anadirSolicitud(Solicitud solicitud) {
+
         solicitudes.add(solicitud);
     }
 
-    public void anadirOrdendePago(Factura ordendepago){
+    public void anadirOrdendePago(Factura ordendepago) {
         ordendepagos.add(ordendepago);
     }
 
-    public List<Opcional> registrarAdicionales(){
+    public List<Opcional> registrarAdicionales() {
         List<Opcional> elementosAdicionales = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         ArrayList<Integer> ops = new ArrayList<>();
         String op = "S";
         int menu;
         double total = 0.00;
-        while(op.equals("S")) {
-            System.out.println("/***** REGISTRO DE ELEMENTOS ADICONALES PARA EL EVENTO *****/ \nLas opciones son: \n1. Comida\n" +
-                    "2. Bocaditos \n3. Musica \n4. Bebida  \n5. Fotografia \n6. Regresar al menu anterior\n" );
+        while (op.equals("S")) {
+            System.out.println("/***** REGISTRO DE ELEMENTOS ADICONALES PARA EL EVENTO *****/ \nLas opciones son: \n1. Comida\n"
+                    + "2. Bocaditos \n3. Musica \n4. Bebida  \n5. Fotografia \n6. Regresar al menu anterior\n");
             System.out.print("Elija elemento a adicionar: ");
             menu = sc.nextInt();
-            while(ops.contains(menu)){
+            while (ops.contains(menu)) {
                 System.out.print("Elija elemento a adicionar: ");
                 menu = sc.nextInt();
 
@@ -231,20 +248,20 @@ public class Planificador extends Usuario {
             ops.add(menu);
             String st;
             double pre;
-            switch (menu){
+            switch (menu) {
                 case 1:
                     System.out.print("Cantida de platos: ");
                     int c = sc.nextInt();
-                    Opcional o1 = new Opcional(15.00,c,Adicional.COMIDA,"Comidas");
+                    Opcional o1 = new Opcional(15.00, c, Adicional.COMIDA, "Comidas");
                     System.out.println("Total: " + o1.getValor());
                     sc.nextLine();
                     System.out.println("Agregar? (S/N)");
                     op = sc.nextLine();
-                    if(op.equals("S")){
+                    if (op.equals("S")) {
                         System.out.println("Se ha agregado su eleccion.");
                         total += o1.getValor();
                         elementosAdicionales.add(o1);
-                    }else{
+                    } else {
                         ops.remove((Integer) 1);
                     }
 
@@ -252,17 +269,17 @@ public class Planificador extends Usuario {
                 case 2:
                     System.out.print("Cantida de bocaditos: ");
                     c = sc.nextInt();
-                    double p =  c < 150 ? 0.25 : 0.10;
-                    Opcional o2 = new Opcional(p,c,Adicional.BOCADITO,"Bocaditos");
+                    double p = c < 150 ? 0.25 : 0.10;
+                    Opcional o2 = new Opcional(p, c, Adicional.BOCADITO, "Bocaditos");
                     System.out.println(o2.getValor());
                     op = sc.nextLine();
                     System.out.println("Agregar? (S/N)");
                     op = sc.nextLine();
-                    if(op.equals("S")) {
+                    if (op.equals("S")) {
                         System.out.println("Se ha agregado su eleccion.");
                         total += o2.getValor();
                         elementosAdicionales.add(o2);
-                    }else{
+                    } else {
                         ops.remove((Integer) 2);
                     }
                     break;
@@ -270,32 +287,32 @@ public class Planificador extends Usuario {
                     System.out.println("Para musica se presentan las opciones de: \n1. DJ ($300) \n2. Banda Musical ($2000)");
                     System.out.print("Que Prefiere? ");
                     menu = sc.nextInt();
-                    if(menu == 1){
+                    if (menu == 1) {
                         pre = 300.00;
                         st = "DJ";
-                    }else{
+                    } else {
                         pre = 2000.00;
                         st = "Banda";
                     }
-                    Opcional o3 = new Opcional(pre,Adicional.MUSICA,st);
+                    Opcional o3 = new Opcional(pre, Adicional.MUSICA, st);
                     sc.nextLine();
                     System.out.println("Total: " + o3.getValor());
-                    if(elementosAdicionales.size() >= 1 ){
-                        for(Opcional o: elementosAdicionales){
-                            if(o.equals(o3)){
+                    if (elementosAdicionales.size() >= 1) {
+                        for (Opcional o : elementosAdicionales) {
+                            if (o.equals(o3)) {
                                 System.out.println("YA HA AGRAGADO ESTE ELEMENTO A SU LISTA ELIJA OTRO");
                                 ops.remove((Integer) 3);
                             }
                         }
-                    }else{
+                    } else {
                         System.out.println("Agregar? (S/N)");
                         op = sc.nextLine();
-                        if(op.equals("S")){
+                        if (op.equals("S")) {
                             System.out.println("Se ha agregado su eleccion.");
                             total += o3.getValor();
                             elementosAdicionales.add(o3);
                             ops.remove((Integer) 3);
-                        }else{
+                        } else {
                             ops.remove((Integer) 3);
                         }
                     }
@@ -308,38 +325,38 @@ public class Planificador extends Usuario {
                     menu = sc.nextInt();
                     System.out.print("Cantidad de Bebidas: ");
                     c = sc.nextInt();
-                    if(menu == 1){
+                    if (menu == 1) {
                         pre = 300.00;
                         st = "Wisky";
-                    }else if(menu == 2){
+                    } else if (menu == 2) {
                         pre = 2000.00;
                         st = "Vodka";
-                    }else if(menu == 3){
+                    } else if (menu == 3) {
                         pre = 2000.00;
                         st = "Cerveza";
-                    }else{
+                    } else {
                         pre = 50;
                         st = "Refrescos";
                     }
-                    Opcional o4 = new Opcional(pre,c,Adicional.BEBIDA,st);
+                    Opcional o4 = new Opcional(pre, c, Adicional.BEBIDA, st);
                     sc.nextLine();
                     System.out.println(o4.getValor());
-                    if(elementosAdicionales.size() >= 1){
-                        for(Opcional o: elementosAdicionales){
-                            if(o.equals(o4)){
+                    if (elementosAdicionales.size() >= 1) {
+                        for (Opcional o : elementosAdicionales) {
+                            if (o.equals(o4)) {
                                 System.out.println("YA HA AGRAGADO ESTE ELEMENTO A SU LISTA ELIJA OTRO");
                                 ops.remove((Integer) 4);
                             }
                         }
-                    }else{
+                    } else {
                         System.out.println("Desea Agregar? (S/N)");
                         op = sc.nextLine();
-                        if(op.equals("S")){
+                        if (op.equals("S")) {
                             System.out.println("Se ha agregado su eleccion.");
                             total += o4.getValor();
                             elementosAdicionales.add(o4);
 
-                        }else{
+                        } else {
                             ops.remove((Integer) 4);
                         }
                     }
@@ -347,16 +364,16 @@ public class Planificador extends Usuario {
                     break;
                 case 5:
                     sc.nextLine();
-                    Opcional o5 = new Opcional(500,Adicional.FOTOGRAFIA,"Fotografias y PhotoShots");
+                    Opcional o5 = new Opcional(500, Adicional.FOTOGRAFIA, "Fotografias y PhotoShots");
                     System.out.println("Se dispone de los mejores fotografos para una major experiencia");
                     System.out.println("Agregar? (S/N)");
                     op = sc.nextLine();
-                    if(op.equals("S")){
+                    if (op.equals("S")) {
                         System.out.println("Se ha agregado su eleccion.");
                         total += o5.getValor();
                         elementosAdicionales.add(o5);
 
-                    }else{
+                    } else {
                         ops.remove((Integer) 5);
                     }
                     break;
@@ -364,11 +381,11 @@ public class Planificador extends Usuario {
                     System.out.println("Volviendo al Menu ");
                     break;
             }
-            if(menu > 5){
+            if (menu > 5) {
                 op = "N";
                 System.out.println("El Total A Pagar Es: " + total);
                 ops.clear();
-            }else{
+            } else {
                 System.out.println("El Total A Pagar Es: " + total);
                 System.out.println("Desea registrar elementos adicionales (S/N)?");
                 op = sc.nextLine().strip();
@@ -379,37 +396,38 @@ public class Planificador extends Usuario {
         return elementosAdicionales;
     }
 
-    public static Evento registrarBoda(Cliente c, Planificador p, Date fechaEvento,Date duraccion, String tipo, int capacidad){
+    public static Evento registrarBoda(Cliente c, Planificador p, Date fechaEvento, Date duraccion, String tipo, int capacidad) {
         String op;
         Scanner sc = new Scanner(System.in);
         String vehiTipo;
         System.out.println("Se Registra Los Datos De La Boda: ");
         System.out.println("Agregar Vehiculo? (S/N)");
         op = sc.nextLine();
-        if(op.equals("S")) {
+        if (op.equals("S")) {
             System.out.print("Ingrese Tipo Vehiculo: ");
             vehiTipo = sc.nextLine();
-        }else{
+        } else {
             vehiTipo = "NO APLICA";
         }
-        Evento e = new Boda(vehiTipo,tipo,fechaEvento,p,c,Estado.PENDIENTE,duraccion,capacidad);
+        Evento e = new Boda(vehiTipo, tipo, fechaEvento, p, c, Estado.PENDIENTE, duraccion, capacidad);
         return e;
 
     }
 
-    public static Evento registraFiestaInfantil(Cliente c, Planificador p, Date fechaEvento,Date duraccion, String tipo, int capacidad){
+    public static Evento registraFiestaInfantil(Cliente c, Planificador p, Date fechaEvento, Date duraccion, String tipo, int capacidad) {
         Scanner sc = new Scanner(System.in);
-        int cantDis,cantSor;
+        int cantDis, cantSor;
         String opc;
         boolean juegos;
         System.out.println("Se Registra Los Datos De La Fiesta Infantil: ");
         System.out.println("Desea Agregar Personajes Difrasados? (S/N)");
         opc = sc.nextLine();
-        if(opc.equals("S")) {
+        if (opc.equals("S")) {
             System.out.println("Cantidad de Personajes Disfrasados: ");
             cantDis = sc.nextInt();
-        }else
+        } else {
             cantDis = 0;
+        }
         sc.nextLine();
         //Ingresar Si Desea Juegos
         System.out.println("Desea Tener Juegos En La Fiesta? (S/N)");
@@ -418,12 +436,12 @@ public class Planificador extends Usuario {
         System.out.println("Cantidad de Sorpresas: ");
         cantSor = sc.nextInt();
         sc.nextLine();
-        Evento e = new FiestaInfantil(cantSor,tipo,fechaEvento,p,c,Estado.PENDIENTE,duraccion,capacidad,juegos);
+        Evento e = new FiestaInfantil(cantSor, tipo, fechaEvento, p, c, Estado.PENDIENTE, duraccion, capacidad, juegos);
         sc.close();
         return e;
     }
 
-    public static Evento registraFiestaEmpresarial(Cliente c, Planificador p, Date fechaEvento,Date duraccion, String tipo, int capacidad){
+    public static Evento registraFiestaEmpresarial(Cliente c, Planificador p, Date fechaEvento, Date duraccion, String tipo, int capacidad) {
         Scanner sc = new Scanner(System.in);
         String o;
         int cantPasajeros;
@@ -431,15 +449,15 @@ public class Planificador extends Usuario {
         System.out.println("Se Registra Los Datos De La Fiesta Infantil: ");
         System.out.println("Desea Transporte? (S/N)");
         o = sc.nextLine();
-        if(o.equals("S")){
+        if (o.equals("S")) {
             transporte = true;
             System.out.println("Cantidad de Pasajeros: ");
             cantPasajeros = sc.nextInt();
-        }else{
+        } else {
             transporte = false;
             cantPasajeros = 0;
         }
-        Evento e = new FiestaEmpresarial(transporte,cantPasajeros,tipo,fechaEvento,p,c,Estado.PENDIENTE,duraccion,capacidad);
+        Evento e = new FiestaEmpresarial(transporte, cantPasajeros, tipo, fechaEvento, p, c, Estado.PENDIENTE, duraccion, capacidad);
         sc.close();
         return e;
     }

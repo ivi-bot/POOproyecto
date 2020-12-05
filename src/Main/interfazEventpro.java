@@ -63,7 +63,7 @@ public class interfazEventpro {
             }
         }
         while (!nomUsuarios.contains(usuarioComprobar)) {
-            System.out.println("Ingrese un usuario  válido");
+            System.out.print("Ingrese un usuario válido: ");
             usuarioComprobar = sc.nextLine();
         }
         int indiceUsuario = nomUsuarios.indexOf(usuarioComprobar);
@@ -84,13 +84,13 @@ public class interfazEventpro {
             System.out.println("1. Solicitar planificación de evento\n2. Registrar pago Evento\n3. Salir");
             System.out.print("Escoja una opcion:");
             opcion = sc.nextLine();
-            ArrayList<String> opcionesV=new ArrayList<>();
+            ArrayList<String> opcionesV = new ArrayList<>();
             opcionesV.add("1");
             opcionesV.add("2");
             opcionesV.add("3");
-            while(!opcionesV.contains(opcion)){
-            System.out.print("Escriba una opcion correcta:");
-            opcion = sc.nextLine();
+            while (!opcionesV.contains(opcion)) {
+                System.out.print("Escriba una opcion correcta:");
+                opcion = sc.nextLine();
             }
             while (Integer.parseInt(opcion) != 3) {
                 if (Integer.parseInt(opcion) == 1) {
@@ -106,7 +106,8 @@ public class interfazEventpro {
                         Archivo.EscribirArchivo("solicitudes.txt", solicitud.getID() + "," + cliente.getNombre() + "," + p.getNombre() + "," + solicitud.getFechaSolicitudS() + "," + solicitud.getFechaEventoS() + "," + solicitud.getEstadoSolicitud());
                         // solicitud.getSolicitudes().add(solicitud);
                         s.add(solicitud);
-                       // System.out.println(s);
+                        // System.out.println(s);
+                        idFactura = evento.getID();
                         solicitud.registro();
                         p.anadirSolicitud(solicitud);
                     } else {
@@ -115,19 +116,31 @@ public class interfazEventpro {
                 } else {
                     cliente.RegistrarPago(idFactura);
                 }
-                System.out.print("Escoga otra opcion si desea continuar\n");
 
                 System.out.println("1. Solicitar planificación de evento\n2. Registrar pago Evento\n3. Salir");
+                System.out.print("Escoja otra opcion si desea continuar ");
                 opcion = sc.nextLine();;
             }
         } else {
             System.out.println("1. Consultar solicitudes pendientes.\n2. Registrar Evento.\n3. Confirmar Evento.\n4. Consultar Evento\n5. Salir");
             System.out.print("Escoja una opcion:");
             opcion = sc.nextLine();
+
+            ArrayList<String> opcionesV1 = new ArrayList<>();
+            opcionesV1.add("1");
+            opcionesV1.add("2");
+            opcionesV1.add("3");
+            opcionesV1.add("4");
+            opcionesV1.add("5");
+            while (!opcionesV1.contains(opcion)) {
+                System.out.print("Escriba una opcion correcta:");
+                opcion = sc.nextLine();
+            }
+
             while (Integer.parseInt(opcion) != 5) {
                 switch (Integer.parseInt(opcion)) {
                     case 1:
-                        
+
                         p.consultarSolicitudes();
 
                         break;
@@ -148,10 +161,20 @@ public class interfazEventpro {
                         break;
 
                 }
-                   System.out.print("Escoga otra opcion si desea continuar\n");
+                System.out.print("Escoga otra opcion si desea continuar\n");
 
-            System.out.println("1. Consultar solicitudes pendientes.\n2. Registrar Evento.\n3. Confirmar Evento.\n4. Consultar Evento\n5. Salir");
+                System.out.println("1. Consultar solicitudes pendientes.\n2. Registrar Evento.\n3. Confirmar Evento.\n4. Consultar Evento\n5. Salir");
                 opcion = sc.nextLine();
+                opcionesV1.add("1");
+                opcionesV1.add("2");
+                opcionesV1.add("3");
+                opcionesV1.add("4");
+                opcionesV1.add("5");
+                while (!opcionesV1.contains(opcion)) {
+                    System.out.print("Escriba una opcion correcta:");
+                    opcion = sc.nextLine();
+                }
+
             }
 
         }

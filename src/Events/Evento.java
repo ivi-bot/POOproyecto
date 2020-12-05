@@ -1,10 +1,12 @@
 package Events;
 
 import EventProclass.Cliente;
+import EventProclass.Opcional;
 import EventProclass.Planificador;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 public class Evento {
@@ -18,14 +20,11 @@ public class Evento {
     protected Estado estado;
     protected Date duracion;
     protected int numeroPersonas;
-    protected int elementosAdicionales;
-    protected Date horaInicio;
-    protected Date horaFin;
-    protected int capacidad;
+    protected List<Opcional> elementosAdicionales;
     private final ArrayList<Integer> codes = new ArrayList<>();
- protected String fechaEventoF;
+    protected String fechaEventoF;
     protected String fechasolicitudF;
-    public Evento(String tipo, Date fechaEvento, Planificador planificador, Cliente cliente, double precioBase, Estado estado, Date duracion, int numeroPersonas, int elementosAdicionales) {
+    public Evento(String tipo, Date fechaEvento, Planificador planificador, Cliente cliente, double precioBase, Estado estado, Date duracion, int numeroPersonas) {
         this.tipo = tipo;
         this.fechaEvento = fechaEvento;
         this.planificador = planificador;
@@ -34,7 +33,7 @@ public class Evento {
         this.estado = estado;
         this.duracion = duracion;
         this.numeroPersonas = numeroPersonas;
-        this.elementosAdicionales = elementosAdicionales;
+        this.elementosAdicionales = new ArrayList<>();
         this.ID = generarCodigo();
     }
 
@@ -46,12 +45,17 @@ public class Evento {
 
     }
 
+    public List<Opcional> getElementosAdicionales() {
+        return elementosAdicionales;
+    }
+
+    public void setElementosAdicionales(List<Opcional> elementosAdicionales) {
+        this.elementosAdicionales = elementosAdicionales;
+    }
+
     public Evento() {
         this.ID = generarCodigo();
     }
-    
-  
-    
 
     public String getTipo() {
         return tipo;
@@ -85,24 +89,8 @@ public class Evento {
         return numeroPersonas;
     }
 
-    public int getElementosAdicionales() {
-        return elementosAdicionales;
-    }
-
     public int getID() {
         return ID;
-    }
-
-    public Date getHoraInicio() {
-        return horaInicio;
-    }
-
-    public Date getHoraFin() {
-        return horaFin;
-    }
-
-    public void setHoraFin(Date horaFin) {
-        this.horaFin = horaFin;
     }
 
     public void setTipo(String tipo) {
@@ -133,9 +121,6 @@ public class Evento {
         this.fechasolicitud = fechasolicitud;
     }
 
-    public void setCapacidad(int capacidad) {
-        this.capacidad = capacidad;
-    }
 
     public void setEstado(Estado estado) {
         this.estado = estado;

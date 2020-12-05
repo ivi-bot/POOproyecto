@@ -18,8 +18,8 @@ public class Boda extends Evento{
 //    }
 //Atributos
 
-    public Boda(String tipoVehiculo, String tipo, Date fecha, Planificador planificador, Cliente cliente, Estado estado, Date duracion, int numeroPersonas, int elementosAdicionales) {
-        super(tipo, fecha, planificador, cliente, 3500, estado, duracion, numeroPersonas, elementosAdicionales);
+    public Boda(String tipoVehiculo, String tipo, Date fecha, Planificador planificador, Cliente cliente, Estado estado, Date duracion, int numeroPersonas) {
+        super(tipo, fecha, planificador, cliente, 3500, estado, duracion, numeroPersonas);
         this.tipoVehiculo = tipoVehiculo;
     }
 

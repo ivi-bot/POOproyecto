@@ -1,20 +1,28 @@
 package EventProclass;
 
-public class Opcional {
-    private double precio;
-    private int cantidad;
-    private double valor;
-    private Adicional tipo;
+import java.util.Objects;
 
-    public Opcional(double precio, int cantidad, Adicional tipo) {
+public class Opcional {
+    private final double precio;
+    private final int cantidad;
+    private final double valor;
+    private final Adicional tipo;
+    private final String subtipo;
+
+    public Opcional(double precio, int cantidad, Adicional tipo,String subtipo) {
         this.precio = precio;
         this.cantidad = cantidad;
         this.tipo = tipo;
+        this.subtipo = subtipo;
         this.valor = this.cantidad * this.precio;
     }
 
 
-    public Opcional(double precio, Adicional tipo) {
+    public Opcional(double precio, Adicional tipo, String subtipo) {
+        this.tipo = tipo;
+        this.cantidad = 1;
+        this.precio = precio;
+        this.subtipo = subtipo;
         this.valor = this.precio;
     }
 
@@ -30,17 +38,12 @@ public class Opcional {
         return valor;
     }
 
-    public void setValor(double valor) {
-        this.valor = valor;
-    }
-
     public Adicional getTipo() {
         return tipo;
     }
 
-
-    public void setTipo(Adicional tipo) {
-        this.tipo = tipo;
+    public String getSubtipo() {
+        return subtipo;
     }
 /**
  * 
@@ -54,6 +57,23 @@ public class Opcional {
                 ", valor=" + valor +
                 ", tipo=" + tipo +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Opcional opcional = (Opcional) o;
+        return Double.compare(opcional.precio, precio) == 0 &&
+                cantidad == opcional.cantidad &&
+                Double.compare(opcional.valor, valor) == 0 &&
+                tipo == opcional.tipo &&
+                Objects.equals(subtipo, opcional.subtipo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(precio, cantidad, valor, tipo, subtipo);
     }
 
 }

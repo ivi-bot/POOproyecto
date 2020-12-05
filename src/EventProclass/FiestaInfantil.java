@@ -14,8 +14,8 @@ public class FiestaInfantil extends Evento{
     private final boolean juegos;
     
     //Metodos    
-    public FiestaInfantil(int cantidadSorpresas, String tipo, Date fecha, Planificador planificador, Cliente cliente, Estado estado, Date duracion, int numeroPersonas, int elementosAdicionales, boolean juegos){
-        super(tipo, fecha, planificador, cliente, 300, estado, duracion, numeroPersonas, elementosAdicionales);
+    public FiestaInfantil(int cantidadSorpresas, String tipo, Date fecha, Planificador planificador, Cliente cliente, Estado estado, Date duracion, int numeroPersonas, boolean juegos){
+        super(tipo, fecha, planificador, cliente, 300, estado, duracion, numeroPersonas);
         this.cantidadSorpresas = cantidadSorpresas;
         this.juegos = juegos;
     }

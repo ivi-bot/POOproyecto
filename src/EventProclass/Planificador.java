@@ -1,11 +1,11 @@
 package EventProclass;
 
+import Archivos.Archivo;
 import Events.Estado;
 import Events.Evento;
-import java.util.Scanner;
+
+import java.util.*;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -57,17 +57,19 @@ public class Planificador extends Usuario {
     }
 /**
  * 
- * @param ID recibe el codigo de la factura que  previamente fue generado para poder 
+ * ID de La Solictud recibe el codigo de la factura que  previamente fue generado para poder
  * registrar el evento
  */
   
     //Esta Funcion le permite al planificador registrar un evento que el usuario a solicitado
     public void registrarEvento() {
+        Scanner sc = new Scanner(System.in);
         System.out.println("Ingrese el id de la solicitud: ");
         int ID = sc.nextInt();
         System.out.println("/**********************REGISTRO DE EVENTOS********"
                 + "****************/\n/*\t\t\t\t\t\t\t\t\t\b\b\t\t\t\t\t\t\t\t\t\t*/\n/****************"
                 + "****************************************************/");
+        sc.nextLine();
         for (Solicitud s : solicitudes) {
             if (s.getID() == ID) {
                 System.out.println("DATOS: ");
@@ -89,22 +91,27 @@ public class Planificador extends Usuario {
                 String op;
                 List<Opcional> elemAdi = this.registrarAdicionales();
                 double totalAdi = 0;
-                for(Opcional o : elemAdi){
+                for (Opcional o : elemAdi) {
                     totalAdi += o.getValor();
+                    Archivo.EscribirArchivo("src/Archivos/adicionales.txt", o.toString());
                 }
-                if(s.getTipoEvento().equals("Boda")){
-                    System.out.println("Se Registra Los Datos De Boda");
-
-                }else if(s.getTipoEvento().equals("Fiesta Empresarial")){
-                    System.out.println("Se Registra Los Datos De La Fiesta Empresarial");
-                }else{
-                    System.out.println("Se Registra Los Datos De La Fiesta Infantil");
+                double costototal = totalAdi + s.getPrecioBase();
+                System.out.println("El costo totol de evento sera: " + costototal + "dolares.");
+                s.setEstadoSolicitud(Estado.APROBADO);
+                Evento e;
+                if (s.getTipoEvento().equals("Boda")) {
+                    e = registrarBoda(s.getCliente(),s.getPlanificador(),s.getFechaEvento(),s.getFechaSolicitud(),s.getTipoEvento(),cap);
+                } else if (s.getTipoEvento().equals("Fiesta Empresarial")) {
+                    e = registraFiestaEmpresarial(s.getCliente(),s.getPlanificador(),s.getFechaEvento(),s.getFechaSolicitud(),s.getTipoEvento(),cap);
+                } else {
+                    e = registraFiestaInfantil(s.getCliente(),s.getPlanificador(),s.getFechaEvento(),s.getFechaSolicitud(),s.getTipoEvento(),cap);
                 }
-
-            }else{
-                System.out.println("Solicitud No Encontrada!");
+                anadirEvento(e);
+                Factura odp = new Factura(s.getNumero(),e.getID(),costototal,Estado.PENDIENTE,s.getID(),new Date());
+                String linea = e.getID()+","+s.getCliente().getNombre()+","+e.getTipo()+","+e.getFechaEvento()+","+hIni+","+hFin+","+cap+","+this.apellido+","+e.getEstado();
+                Archivo.EscribirArchivo("src/Archivos/eventos.txt",linea);
             }
-        }
+        }//endfor
 
     }
 /**
@@ -369,6 +376,71 @@ public class Planificador extends Usuario {
         System.out.println("El Total A Pagar Es: " + total);
         sc.close();
         return elementosAdicionales;
+    }
+
+    public static Evento registrarBoda(Cliente c, Planificador p, Date fechaEvento,Date duraccion, String tipo, int capacidad){
+        String op;
+        Scanner sc = new Scanner(System.in);
+        String vehiTipo;
+        System.out.println("Se Registra Los Datos De La Boda: ");
+        System.out.println("Agregar Vehiculo? (S/N)");
+        op = sc.nextLine();
+        if(op.equals("S")) {
+            System.out.print("Ingrese Tipo Vehiculo: ");
+            vehiTipo = sc.nextLine();
+        }else{
+            vehiTipo = "NO APLICA";
+        }
+        Evento e = new Boda(vehiTipo,tipo,fechaEvento,p,c,Estado.PENDIENTE,duraccion,capacidad);
+        return e;
+
+    }
+
+    public static Evento registraFiestaInfantil(Cliente c, Planificador p, Date fechaEvento,Date duraccion, String tipo, int capacidad){
+        Scanner sc = new Scanner(System.in);
+        int cantDis,cantSor;
+        String opc;
+        boolean juegos;
+        System.out.println("Se Registra Los Datos De La Fiesta Infantil: ");
+        System.out.println("Desea Agregar Personajes Difrasados? (S/N)");
+        opc = sc.nextLine();
+        if(opc.equals("S")) {
+            System.out.println("Cantidad de Personajes Disfrasados: ");
+            cantDis = sc.nextInt();
+        }else
+            cantDis = 0;
+        sc.nextLine();
+        //Ingresar Si Desea Juegos
+        System.out.println("Desea Tener Juegos En La Fiesta? (S/N)");
+        opc = sc.nextLine();
+        juegos = opc.equals("S");
+        System.out.println("Cantidad de Sorpresas: ");
+        cantSor = sc.nextInt();
+        sc.nextLine();
+        Evento e = new FiestaInfantil(cantSor,tipo,fechaEvento,p,c,Estado.PENDIENTE,duraccion,capacidad,juegos);
+        sc.close();
+        return e;
+    }
+
+    public static Evento registraFiestaEmpresarial(Cliente c, Planificador p, Date fechaEvento,Date duraccion, String tipo, int capacidad){
+        Scanner sc = new Scanner(System.in);
+        String o;
+        int cantPasajeros;
+        boolean transporte;
+        System.out.println("Se Registra Los Datos De La Fiesta Infantil: ");
+        System.out.println("Desea Transporte? (S/N)");
+        o = sc.nextLine();
+        if(o.equals("S")){
+            transporte = true;
+            System.out.println("Cantidad de Pasajeros: ");
+            cantPasajeros = sc.nextInt();
+        }else{
+            transporte = false;
+            cantPasajeros = 0;
+        }
+        Evento e = new FiestaEmpresarial(transporte,cantPasajeros,tipo,fechaEvento,p,c,Estado.PENDIENTE,duraccion,capacidad);
+        sc.close();
+        return e;
     }
 
 }

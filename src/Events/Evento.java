@@ -151,4 +151,22 @@ public class Evento {
         codes.add(n);
         return n;
     }
+
+    @Override
+    public String toString() {
+        return "ID=" + ID +
+                ",tipo" + tipo +
+                ",fechaEvento" + fechaEvento +
+                ",fechasolicitud" + fechasolicitud +
+                ",planificador" + planificador +
+                ",cliente" + cliente +
+                ",precioBase" + precioBase +
+                ",estado" + estado +
+                ",duracion" + duracion +
+                ",numeroPersonas" + numeroPersonas +
+                ",elementosAdicionales" + elementosAdicionales +
+                ",codes" + codes +
+                ",fechaEventoF" + fechaEventoF +
+                ",fechasolicitudF" + fechasolicitudF;
+    }
 }

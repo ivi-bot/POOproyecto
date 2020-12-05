@@ -51,11 +51,10 @@ public class Opcional {
  */
     @Override
     public String toString() {
-        return "Opcional{" +
-                "precio=" + precio +
-                ", cantidad=" + cantidad +
-                ", valor=" + valor +
-                ", tipo=" + tipo +
+        return "precio" + precio +
+                ",cantidad" + cantidad +
+                "valor" + valor +
+                "tipo" + tipo +
                 '}';
     }
 

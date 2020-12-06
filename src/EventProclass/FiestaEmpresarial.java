@@ -24,10 +24,15 @@ public class FiestaEmpresarial extends Evento{
     }
 
     @Override
-    public void mostrarPromociones(){
+    public String mostrarPromociones(){
         super.mostrarPromociones();
-    System.out.println("El transporte al lugar del evento es gratuito en un próximo evento, "
-            + "si lo organizan con el mismo planificador"); 
+        return "El transporte al lugar del evento es gratuito en un próximo evento, si lo organizan con el mismo planificador";
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + "FiestaEmpresarial{" +
+                "deseaTransporte=" + deseaTransporte +
+                ", cantidadPersonas=" + cantidadPersonas;
+    }
 }

@@ -22,13 +22,16 @@ public class Boda extends Evento{
 
 
     @Override
-    public void mostrarPromociones() {
-                super.mostrarPromociones();
-
-        System.out.println("Los novios tendrán un 25% de descuento si compran sus"
-                + "tickets de luna de miel en la aereolínea LATAM");
+    public String mostrarPromociones() {
+        super.mostrarPromociones();
+        return "Los novios tendrán un 25% de descuento si compran sus tickets de luna de miel en la aereolínea LATAM";
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + "tipoVehiculo='" + tipoVehiculo + '\'' +
+                ", precioBase=" + precioBase;
+    }
 }
     
 

@@ -33,11 +33,16 @@ public class FiestaInfantil extends Evento{
     }
 
     @Override
-    public void mostrarPromociones() {
-                super.mostrarPromociones();
-
-        System.out.println("Si realizan un próximo evento en las mismas instalaciones"
-                + "en un plazo de 6 meses se les otorgará un servicio de música gratuito");    
+    public String mostrarPromociones() {
+        super.mostrarPromociones();
+        return "Si realizan un próximo evento en las mismas instalaciones en un plazo de 6 meses se les otorgará un servicio de música gratuito";
     }
 
+    @Override
+    public String toString() {
+        return super.toString() +"FiestaInfantil" +
+                "pDisfrazados=" + pDisfrazados +
+                ", cantidadSorpresas=" + cantidadSorpresas +
+                ", juegos=" + juegos;
+    }
 }

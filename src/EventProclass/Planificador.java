@@ -18,6 +18,7 @@ public class Planificador extends Usuario {
     private List<String> solicitudes = Archivo.LeeFichero("solicitudes.txt");
     private List<Factura> ordendepagos = new ArrayList<>();
     private List<Solicitud> solicitudes1 = new ArrayList<>();
+    private List<Evento> event = new ArrayList<>();
 
     public Planificador(List<String> eventos, ArrayList<String> solicitudes, List<Factura> ordendepagos, String nombre, String apellido, String nomUsuario, String contraseña, char tipo) {
         super(nombre, apellido, nomUsuario, contraseña, tipo);
@@ -147,6 +148,7 @@ public class Planificador extends Usuario {
             Archivo.EscribirArchivo("eventos.txt", s.getID() + "," + nombreU.get(indiceEvento) + "," + nombreP.get(indiceEvento) + "," + s.getFechaSolicitudS() + "," + s.getFechaEventoS() + "," + "APROBADA");
           //  Cliente c, ArrayList<Opcional> elementosAdicionales, Evento e
             factura.mostrarOrdendePago(cliente, registrarAdicionales(), e);
+            anadirEvent(e);
         } else {
             System.out.println("Gracias");
         }
@@ -252,62 +254,49 @@ public class Planificador extends Usuario {
      */
     public void consultarEvento() {
         int op, nBoda = 0, nEmpre = 0, nInfa = 0;
+        String mensaje="";
         System.out.println("/**********************CONSULTAR EVENTOS******"
-                + "****************/\n/*\t\t\t\t\t\t\t\t\t\b\b*/\n/****************"
-                + "*******************************************/");
+                + "****************/\n/*\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tb\b*/\n/****************"
+                + "********************************************/");
         System.out.println("TIPOS DE EVENTOS \n1. Boda\n2. Fiesta Infantil \n3. Fiesta Empresarial");
         System.out.print("Elija el tipo de eventos que requiere consultar: ");
-        Scanner sc4 = new Scanner(System.in);
+        Scanner sc4=new Scanner(System.in);
         op = sc4.nextInt();
-
-        eventos = Archivo.LeeFichero("solicitudesTipoEvento.txt");
-        List<String> imprimirCodigo = new ArrayList<>();
-        List<String> fecha1 = new ArrayList<>();
-        for (int i = 0; i < eventos.size(); i++) {
-            String[] datos = eventos.get(i).split(",");
-            imprimirCodigo.add(datos[0]);
-            fecha1.add(datos[3]);
-        }
-
         if (eventos.size() >= 1) {
-            for (Evento e : eventos) {
+            for (Evento e : event) {
                 if (e.getPlanificador().getApellido().equals(apellido)) {
                     if (e instanceof Boda) {
                         nBoda++;
                         Boda b = (Boda) e;
-                        b.mostrarPromociones();
-                    } else if (e instanceof FiestaEmpresarial) {
-                        nEmpre++;
-                        FiestaEmpresarial fe = (FiestaEmpresarial) e;
-                        fe.mostrarPromociones();
-                    } else {
+                        mensaje = b.mostrarPromociones();
+                    } else if (e instanceof FiestaInfantil) {
                         nInfa++;
                         FiestaInfantil fi = (FiestaInfantil) e;
-                        fi.mostrarPromociones();
+                        mensaje = fi.mostrarPromociones();
+                    } else {
+                        nEmpre++;
+                        FiestaEmpresarial fe = (FiestaEmpresarial) e;
+                        mensaje = fe.mostrarPromociones();
                     }
-                } else {
-                    System.out.println("Evento no encontrado!");
                 }
-
             }
-        } else {
-            System.out.println("Usted No Tiene eventos");
             switch (op) {
                 case 1:
                     //int n = (int) eventos.stream().filter(e -> e.getTipo().equals("Boda")).count();
-                    System.out.println("\nTiene " + nBoda + "bodas asignadas.\n");
+                    System.out.println("\nTiene " + nBoda + " bodas asignadas.\n\n" + mensaje);
                     break;
                 case 2:
-                    System.out.println("\nTiene " + nInfa + "fiestas infantiles asignadas.\n");
+                    System.out.println("\nTiene " + nInfa + " fiestas infantiles asignadas.\n\n"+ mensaje);
                     break;
                 case 3:
-                    System.out.println("\nTiene " + nEmpre + "fiestas empresariales asignadas.\n");
+                    System.out.println("\nTiene " + nEmpre + " fiestas empresariales asignadas.\n\n"+ mensaje);
                     break;
                 default:
                     System.out.println("Volviendo al Menu...");
                     break;
             }
-
+        }else{
+            System.out.println("Usted No Tiene Eventos Para Consultar!!!");
         }
     }
 
@@ -321,6 +310,10 @@ public class Planificador extends Usuario {
 
     public void anadirEvento(String evento) {
         eventos.add(evento);
+    }
+
+    public void anadirEvent(Evento e){
+        event.add(e);
     }
 
     public void anadirSolicitud(String solicitud) {

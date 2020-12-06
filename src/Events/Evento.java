@@ -158,8 +158,8 @@ public class Evento {
         System.out.println("Some Code");
     }
 
-    public void mostrarPromociones() {
-        System.out.println("Recuerde estas promociones");
+    public String mostrarPromociones() {
+        return "Recuerde estas promociones";
     }
     //Genera un numero aleatorio y se le asigna el valor a la variable de instancia ID, este valor es unico
     //y no retorna nada.

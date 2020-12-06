@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Evento {
+
     protected final int ID;
     protected String tipo;
     protected Date fechaEvento;
@@ -24,7 +25,7 @@ public class Evento {
     private final ArrayList<Integer> codes = new ArrayList<>();
     protected String fechaEventoF;
     protected String fechasolicitudF;
-    
+
     public Evento(String tipo, Date fechaEvento, Planificador planificador, Cliente cliente, double precioBase, Estado estado, Date duracion, int numeroPersonas) {
         this.tipo = tipo;
         this.fechaEvento = fechaEvento;
@@ -38,11 +39,20 @@ public class Evento {
         this.ID = generarCodigo();
     }
 
-    public Evento(String tipo,String fechaEventoF, String fechasolicitudF){
-    this.tipo=tipo;
-    this.fechaEventoF=fechaEventoF;
-    this.fechasolicitudF=fechasolicitudF;
-    this.ID = generarCodigo();
+    public Evento(String tipo, String fechaEventoF, String fechasolicitudF) {
+        this.tipo = tipo;
+        this.fechaEventoF = fechaEventoF;
+        this.fechasolicitudF = fechasolicitudF;
+        this.ID = generarCodigo();
+        if (tipo.equalsIgnoreCase("boda")) {
+            precioBase=3500.0;
+        } else if (tipo.equalsIgnoreCase("fiesta empresarial")) {
+                        precioBase=2000.0;
+
+        } else {
+                        precioBase=300.0;
+
+        }
 
     }
 
@@ -122,7 +132,6 @@ public class Evento {
         this.fechasolicitud = fechasolicitud;
     }
 
-
     public void setEstado(Estado estado) {
         this.estado = estado;
     }
@@ -131,11 +140,11 @@ public class Evento {
         this.fechaEvento = fechaEvento;
     }
 
-    public void mostrarInformacion(){
+    public void mostrarInformacion() {
         System.out.println("Some Code");
     }
 
-    public void mostrarPromociones(){
+    public void mostrarPromociones() {
         System.out.println("Recuerde estas promociones");
     }
     //Genera un numero aleatorio y se le asigna el valor a la variable de instancia ID, este valor es unico
@@ -143,10 +152,10 @@ public class Evento {
 
     /*La funcion generarCode genera un numero aleatorio entre el rango de 0 a 100000, y devuelve un entero
     * que es el codigo que se le asigna a la variable de instacia ID*/
-    private int generarCodigo(){
+    private int generarCodigo() {
         Random r = new Random();
         int n = r.nextInt(1000);
-        while(codes.contains(n)){
+        while (codes.contains(n)) {
             n = r.nextInt(1000);
         }
         codes.add(n);
@@ -155,19 +164,19 @@ public class Evento {
 
     @Override
     public String toString() {
-        return "ID=" + ID +
-                ",tipo" + tipo +
-                ",fechaEvento" + fechaEvento +
-                ",fechasolicitud" + fechasolicitud +
-                ",planificador" + planificador +
-                ",cliente" + cliente +
-                ",precioBase" + precioBase +
-                ",estado" + estado +
-                ",duracion" + duracion +
-                ",numeroPersonas" + numeroPersonas +
-                ",elementosAdicionales" + elementosAdicionales +
-                ",codes" + codes +
-                ",fechaEventoF" + fechaEventoF +
-                ",fechasolicitudF" + fechasolicitudF;
+        return "ID=" + ID
+                + ",tipo" + tipo
+                + ",fechaEvento" + fechaEvento
+                + ",fechasolicitud" + fechasolicitud
+                + ",planificador" + planificador
+                + ",cliente" + cliente
+                + ",precioBase" + precioBase
+                + ",estado" + estado
+                + ",duracion" + duracion
+                + ",numeroPersonas" + numeroPersonas
+                + ",elementosAdicionales" + elementosAdicionales
+                + ",codes" + codes
+                + ",fechaEventoF" + fechaEventoF
+                + ",fechasolicitudF" + fechasolicitudF;
     }
 }

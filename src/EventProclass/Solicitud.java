@@ -34,7 +34,6 @@ public class Solicitud {
     private  String fechaEventoS;
     private ArrayList<Solicitud> solicitudes=new ArrayList<>();
     public Solicitud(Cliente cliente, Planificador planificador, String tipoEvento, String fechaSolicitudS, String fechaEventoS) {
-        //this.numero = numero;
         this.cliente = cliente;
         this.planificador = planificador;
         this.fechaSolicitudS = fechaSolicitudS;
@@ -119,26 +118,27 @@ public class Solicitud {
                 + cliente.nombre.toUpperCase() +" "+ cliente.apellido.toUpperCase() + "\n"
                 + "PLANIFICADOR ASIGNADO: " + planificador.nombre.toUpperCase() + " "+planificador.getApellido().toUpperCase() + "\n"
                 + "FECHA DE REGISTRO: " + fechaSolicitudS + "\n"
+                +"TIPO EVENTO: "+tipoEvento+"\n"
                 + "FECHA DEL EVENTO: " + fechaEventoS + "\n\n" + "**Se ha registrado su solicitud, pronto el planificador se"
                 + " contactará con usted por teléfono o video conferencia para completar el proceso de recolección de datos");}
+    
+    public String escribirArchivo2(){
+    return ","+cliente.nombre.toUpperCase() +" "+ cliente.apellido.toUpperCase()+","+planificador.nombre.toUpperCase() + " "+planificador.getApellido().toUpperCase()
+            +","+fechaSolicitudS+","+tipoEvento+","+fechaEventoS;
+     
+    }
+    
+    
+    
+    
     public void setEstadoSolicitud(Estado estadoSolicitud) {
         this.estadoSolicitud = estadoSolicitud;
     }
-//
-//    private int generarCodigo() {
-//        Random r = new Random();
-//        int n = r.nextInt(100000);
-//        while (ids.contains(n)) {
-//            n = r.nextInt(100000);
-//        }
-//        ids.add(n);
-//        return n;
-//    }
-
-    //Metodos    
-    //Genera un codigo aleatorio de 4 digitos que no se repite
     Set<Integer> usados = new HashSet<>();
 
+    
+    
+    
     private int generarCodigo2() {
         boolean aux = false;
         Random x = new Random();

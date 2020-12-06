@@ -14,11 +14,11 @@ import java.text.SimpleDateFormat;
 public class Planificador extends Usuario {
 
     private static final SimpleDateFormat dateFormatHora = new SimpleDateFormat("HH:mm");
-    private List<Evento> eventos = new ArrayList<>();
-    private List<Solicitud> solicitudes = new ArrayList<>();
+    private List<String> eventos = Archivo.LeeFichero("solicitudesTipoEvento.txt");
+    private List<String> solicitudes = Archivo.LeeFichero("solicitudes.txt");
     private List<Factura> ordendepagos = new ArrayList<>();
 
-    public Planificador(List<Evento> eventos, ArrayList<Solicitud> solicitudes, List<Factura> ordendepagos, String nombre, String apellido, String nomUsuario, String contraseña, char tipo) {
+    public Planificador(List<String> eventos, ArrayList<String> solicitudes, List<Factura> ordendepagos, String nombre, String apellido, String nomUsuario, String contraseña, char tipo) {
         super(nombre, apellido, nomUsuario, contraseña, tipo);
         this.eventos = eventos;
         this.solicitudes = solicitudes;
@@ -27,12 +27,6 @@ public class Planificador extends Usuario {
 
     public Planificador(String nombre, String apellido, String nomUsuario, String contraseña, char tipo) {
         super(nombre, apellido, nomUsuario, contraseña, tipo);
-
-    }
-
-    public Planificador(ArrayList<Solicitud> solicitudes, String nombre, String apellido, String nomUsuario, String contraseña, char tipo) {
-        super(nombre, apellido, nomUsuario, contraseña, tipo);
-        this.solicitudes = solicitudes;
 
     }
 
@@ -45,14 +39,30 @@ public class Planificador extends Usuario {
      * Este metodo permite consultar todas la solicitudes que tiene cada
      * planificar y no retorna nada.
      */
-    public void consultarSolicitudes() {
-        int cont = 1;
+    public void consultarSolicitudes(String nombre1) {
         System.out.println("/**********************SOLICITUDES PENDIENTES********"
                 + "****************/\n/*\t\t\t\t\t\t\t\t\t\b\b\t\t\t\t\t\t\t\t\t\t*/\n/****************"
                 + "****************************************************/");
-        for (Solicitud s : solicitudes) {
-            System.out.println(cont + ". " + s.getID() + " - " + s.getFechaEvento());
-            cont++;
+
+        solicitudes = Archivo.LeeFichero("solicitudes.txt");
+        List<String> imprimirCodigo = new ArrayList<>();
+        List<String> imprimirFecha = new ArrayList<>();
+
+        for (int i = 0; i < solicitudes.size(); i++) {
+            String[] datos = solicitudes.get(i).split(",");
+            if (datos[2].equalsIgnoreCase(nombre1)) {
+                imprimirCodigo.add(datos[0]);
+                imprimirFecha.add(datos[4]);
+            } else {
+                System.out.println("Usted no tiene solicitudes pendientes");
+            }
+        }
+
+        if (imprimirCodigo.size() != 0) {
+            System.out.println("Tiene " + imprimirCodigo.size() + " solicitudes pendientes");
+            for (int i = 0; i < imprimirCodigo.size(); i++) {
+                System.out.println(i + 1 + ". " + imprimirCodigo.get(i) + " - " + imprimirFecha.get(i));
+            }
         }
     }
 
@@ -62,14 +72,41 @@ public class Planificador extends Usuario {
      * generado para poder registrar el evento
      */
     //Esta Funcion le permite al planificador registrar un evento que el usuario a solicitado
-    public void registrarEvento() {
+    public void registrarEvento(String nombre3) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Ingrese el id de la solicitud: ");
-        int ID = sc.nextInt();
+        String ID = sc.nextLine();
         System.out.println("/*******REGISTRO DE EVENTOS***"
                 + "*****/\n/\t\t\t\t\t\t\t\t\t\b\b\t\t\t\t\t\t\t\t\t\t*/\n/******"
                 + "******************/");
         sc.nextLine();
+        eventos = Archivo.LeeFichero("solicitudes.txt");
+        List<String> imprimirCodigo = new ArrayList<>();
+        List<String> nombreU = new ArrayList<>();
+        List<String> nombreP = new ArrayList<>();
+        List<String> fecha1 = new ArrayList<>();
+        List<String> tipo = new ArrayList<>();
+        List<String> fecha2 = new ArrayList<>();
+        List<String> precio = new ArrayList<>();
+        for (int i = 0; i < eventos.size(); i++) {
+            String[] datos = eventos.get(i).split(",");
+            if (datos[0].equalsIgnoreCase(ID) || datos[2].equalsIgnoreCase(nombre3)) {
+                imprimirCodigo.add(datos[0]);
+                nombreU.add(datos[1]);
+                nombreP.add(datos[2]);
+                fecha1.add(datos[3]);
+                nombreU.add(datos[1]);
+
+            } else {
+                System.out.println("Usted no tiene solicitudes pendientes");
+            }
+        }
+
+        
+        
+        //CREAR OBJETOS 
+        
+        
         if (solicitudes.size() >= 1) {
             for (Solicitud s : solicitudes) {
                 if (s.getID() == ID) {
@@ -107,7 +144,7 @@ public class Planificador extends Usuario {
                     } else {
                         e = registraFiestaInfantil(s.getCliente(), s.getPlanificador(), s.getFechaEvento(), s.getFechaSolicitud(), s.getTipoEvento(), cap);
                     }
-                    anadirEvento(e);
+//                    anadirEvento(e);
                     Factura odp = new Factura(s.getNumero(), e.getID(), costototal, Estado.PENDIENTE, s.getID(), new Date());
                     String linea = e.getID() + "," + s.getCliente().getNombre() + "," + e.getTipo() + "," + e.getFechaEvento() + "," + hIni + "," + hFin + "," + cap + "," + this.apellido + "," + e.getEstado();
                     Archivo.EscribirArchivo("src/Archivos/eventos.txt", linea);
@@ -126,35 +163,33 @@ public class Planificador extends Usuario {
         System.out.println("/**********************CONFIRMAR EVENTO******"
                 + "****************/\n/*\t\t\t\t\t\t\t\t\t\b\b*/\n/****************"
                 + "*******************************************/");
-        int id;
-        System.out.print("Ingrese el id de la orden de pago: ");
-        Scanner sc3=new Scanner(System.in);
-        id = sc3.nextInt();
-        if (ordendepagos.size() >= 1) {
-            for (Factura odp : ordendepagos) {
-                if ((odp.getId() == id)) {
-                    System.out.print("El pago de este evento se ha realizado el: " + odp.getFechaRegistro());
-                    System.out.print("Desea aprobar este pago? (S/N): ");
-                    String o = sc.nextLine();
-                    if (o.equalsIgnoreCase("S")) {
-                        System.out.println("El pago se ha aprobado.");
-                        odp.setEstado(Estado.APROBADO);
-                        eventos.stream().filter(e -> e.getID() == odp.getCodigoEvento()).forEach(evento -> evento.setEstado(Estado.APROBADO));
-                    } else {
-                        System.out.println("No se ha aprobado el pago!");
-                    }
-                }
-            }
-        }
-        else {
-            System.out.println("Usted No Tiene facturas");
-        }
+//        int id;
+//        System.out.print("Ingrese el id de la orden de pago: ");
+//        Scanner sc3 = new Scanner(System.in);
+//        id = sc3.nextInt();
+//        if (ordendepagos.size() >= 1) {
+//            for (Factura odp : ordendepagos) {
+//                if ((odp.getId() == id)) {
+//                    System.out.print("El pago de este evento se ha realizado el: " + odp.getFechaRegistro());
+//                    System.out.print("Desea aprobar este pago? (S/N): ");
+//                    String o = sc.nextLine();
+//                    if (o.equalsIgnoreCase("S")) {
+//                        System.out.println("El pago se ha aprobado.");
+//                        odp.setEstado(Estado.APROBADO);
+//                        eventos.stream().filter(e -> e.getID() == odp.getCodigoEvento()).forEach(evento -> evento.setEstado(Estado.APROBADO));
+//                    } else {
+//                        System.out.println("No se ha aprobado el pago!");
+//                    }
+//                }
+//            }
+//        } else {
+//            System.out.println("Usted No Tiene facturas");
+//        }
     }
 
     /**
      * Permite al planificador visualizar su lista de eventos
      */
-
     public void consultarEvento() {
         int op, nBoda = 0, nEmpre = 0, nInfa = 0;
         System.out.println("/**********************CONSULTAR EVENTOS******"
@@ -162,7 +197,7 @@ public class Planificador extends Usuario {
                 + "*******************************************/");
         System.out.println("TIPOS DE EVENTOS \n1. Boda\n2. Fiesta Infantil \n3. Fiesta Empresarial");
         System.out.print("Elija el tipo de eventos que requiere consultar: ");
-         Scanner sc4=new Scanner(System.in);
+        Scanner sc4 = new Scanner(System.in);
         op = sc4.nextInt();
         if (eventos.size() >= 1) {
             for (Evento e : eventos) {
@@ -206,19 +241,19 @@ public class Planificador extends Usuario {
         }
     }
 
-    public List<Solicitud> getSolicitudes() {
+    public List<String> getSolicitudes() {
         return solicitudes;
     }
 
-    public void setSolicitudes(ArrayList<Solicitud> solicitudes) {
+    public void setSolicitudes(ArrayList<String> solicitudes) {
         this.solicitudes = solicitudes;
     }
 
-    public void anadirEvento(Evento evento) {
+    public void anadirEvento(String evento) {
         eventos.add(evento);
     }
 
-    public void anadirSolicitud(Solicitud solicitud) {
+    public void anadirSolicitud(String solicitud) {
 
         solicitudes.add(solicitud);
     }

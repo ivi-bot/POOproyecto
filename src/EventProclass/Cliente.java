@@ -51,15 +51,15 @@ public class Cliente extends Usuario {
     private boolean validarTiempo(int tiempo) {
         Date currentDate = new Date();
         String fechaActual = dateFormat.format(currentDate);
-       // System.out.println(dateFormat.format(currentDate));
+        // System.out.println(dateFormat.format(currentDate));
         System.out.println("Ingrese la fecha deseada con el siguiente formato: dd/MM/yyyy\nPsdt. No ingrese fechas anteriores a la actual, su registro será inválido");
         System.out.print("Fecha del evento: ");
         Scanner t = new Scanner(System.in);
         String fechaUsuario = t.nextLine();
-            while(!fechaUsuario.contains("/")){
+        while (!fechaUsuario.contains("/")) {
             System.out.print("Por favor ingrese la fecha deseada con el siguiente formato: dd/MM/yyyy\nSi tiene conflicto aqui un ejemplo:04/04/2012");
             fechaUsuario = t.nextLine();
-            }    
+        }
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.DAY_OF_MONTH, Integer.parseInt(fechaActual.substring(0, 2)));
         cal.set(Calendar.MONTH, Integer.parseInt(fechaActual.substring(3, fechaActual.length() - 5)));
@@ -70,7 +70,7 @@ public class Cliente extends Usuario {
         cal.set(Calendar.YEAR, Integer.parseInt(fechaUsuario.substring(6, fechaUsuario.length())));
         Date secondDate = cal.getTime();
         long difD = secondDate.getTime() - firstDate.getTime();
-      //  System.out.println("Days: " + difD / 1000 / 60 / 60 / 24);
+        //  System.out.println("Days: " + difD / 1000 / 60 / 60 / 24);
         try {
             Calendar inicio = new GregorianCalendar();
             Calendar fin = new GregorianCalendar();
@@ -78,11 +78,11 @@ public class Cliente extends Usuario {
             fin.setTime(new SimpleDateFormat("dd/MM/yyyy").parse(fechaUsuario));
             int difA = fin.get(Calendar.YEAR) - inicio.get(Calendar.YEAR);
             int difM = difA * 12 + fin.get(Calendar.MONTH) - inicio.get(Calendar.MONTH);
-           // System.out.println(difM);
+            // System.out.println(difM);
 
             switch (tiempo) {
                 case 1:
-                    if (difM >= 10) {              
+                    if (difM >= 10) {
                         fecha1 = fechaUsuario;
                         fecha2 = fechaActual;
                         return true;
@@ -108,6 +108,7 @@ public class Cliente extends Usuario {
         }
         return false;
     }
+
     /**
      *
      * @return Retorna el tipo de evento que creo el usuario
@@ -121,14 +122,14 @@ public class Cliente extends Usuario {
         System.out.println("TIPO DE EVENTO (Elija)\n1.Boda\n2.Fiesta Infantil\n3.Fiesta Empresarial");
         System.out.print("Seleccione: ");
         opcion_usuario = sc.nextLine();
-        ArrayList<String> opcionesV2=new ArrayList<>();
-            opcionesV2.add("1");
-            opcionesV2.add("2");
-            opcionesV2.add("3");
-            while(!opcionesV2.contains(opcion_usuario)){
+        ArrayList<String> opcionesV2 = new ArrayList<>();
+        opcionesV2.add("1");
+        opcionesV2.add("2");
+        opcionesV2.add("3");
+        while (!opcionesV2.contains(opcion_usuario)) {
             System.out.print("Escriba una opcion correcta:");
             opcion_usuario = sc.nextLine();
-            }   
+        }
         switch (opcion_usuario) {
             case "1":
                 System.out.println("/**********************EVENTO BODA******"
@@ -179,19 +180,33 @@ public class Cliente extends Usuario {
                 + "*******************************************/");
         System.out.println("Su orden con código " + ID + " esta pendiente de pago");
         System.out.print("¿Desea registrar pago ahora? (S/N): ");
-        Scanner sc1=new Scanner(System.in);
-        String op = sc1.nextLine().toUpperCase();
-    ArrayList<String> opcionesV1=new ArrayList<>();
-            opcionesV1.add("S");
-            opcionesV1.add("N");
-            while(!opcionesV1.contains(op)){
+        Scanner sc1 = new Scanner(System.in);
+        String op = sc1.nextLine();
+        ArrayList<String> opcionesV4 = new ArrayList<>();
+        opcionesV4.add("S");
+        opcionesV4.add("N");
+           opcionesV4.add("s");
+        opcionesV4.add("n");
+        while (!opcionesV4.contains(op)) {
             System.out.print("Escriba una opcion correcta:");
-            op = sc.nextLine();
-            }
+            op = sc1.nextLine();
+        }
+
+        ArrayList<String> opcionesV1 = new ArrayList<>();
+        opcionesV1.add("S");
+        opcionesV1.add("N");
+        opcionesV1.add("s");
+        opcionesV1.add("n");
+        while (!opcionesV1.contains(op)) {
+            System.out.print("Escriba una opcion correcta:");
+            op = sc1.nextLine();
+        }
         if (op.equalsIgnoreCase("S")) {
-            System.out.print("Ingrese el codigo de la transacción: ");
-            int codigoT = sc1.nextInt();
             
+            System.out.println("Ingrese el codigo de la transacción: ");
+            System.out.print("Ingrese un numero valido por favor: ");
+            String codigoT = sc1.nextLine();
+
             System.out.println("Listo, se ha registrado. Cuando el planificador valide el pago se pondrá en contacto con usted");
         } else {
             System.out.println("Gracias");

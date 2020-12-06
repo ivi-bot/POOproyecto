@@ -23,7 +23,7 @@ public class Solicitud {
     private  int ID;
     private int numero;
     private final Cliente cliente;
-    private final Planificador planificador;
+    private  Planificador planificador;
     private  Date fechaEvento;
     private final String tipoEvento;
     private  Date fechaSolicitud;
@@ -33,6 +33,7 @@ public class Solicitud {
     private  String fechaSolicitudS;
     private  String fechaEventoS;
     private ArrayList<Solicitud> solicitudes=new ArrayList<>();
+    private String nombrePlanificador;
     public Solicitud(Cliente cliente, Planificador planificador, String tipoEvento, String fechaSolicitudS, String fechaEventoS) {
         this.cliente = cliente;
         this.planificador = planificador;
@@ -49,6 +50,29 @@ public class Solicitud {
             this.precioBase = 300;
         }
     }
+    
+    public Solicitud(Cliente cliente, String nombrePlanificador, String tipoEvento, String fechaSolicitudS, String fechaEventoS,int ID) {
+        this.cliente = cliente;
+        this.nombrePlanificador = nombrePlanificador;
+        this.fechaSolicitudS = fechaSolicitudS;
+        this.fechaEventoS = fechaEventoS;
+        this.estadoSolicitud = Estado.PENDIENTE;
+        this.tipoEvento = tipoEvento;
+        this.ID = ID;
+        if (this.tipoEvento.equalsIgnoreCase("Boda")) {
+            this.precioBase = 3500.00;
+        } else if (this.tipoEvento.equalsIgnoreCase("Fiesta Empresarial")) {
+            this.precioBase = 2000.00;
+        } else {
+            this.precioBase = 300;
+        }
+    }
+    
+    
+    
+    
+    
+    
     public int getID() {
         return ID;
     }

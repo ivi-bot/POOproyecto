@@ -40,6 +40,10 @@ public class Cliente extends Usuario {
         super(nombre, apellido, nomUsuario, contraseña, tipo);
     }
 
+    public Cliente(String nombre) {
+        super(nombre);
+    }
+
     /**
      * @param tiempo opcion que se recibe del metodo crearSolicitud donde 1, es
      * para boda, 2 fiesta infantil y 3 fiesta empresarial y dentro la se
@@ -185,7 +189,7 @@ public class Cliente extends Usuario {
         ArrayList<String> opcionesV4 = new ArrayList<>();
         opcionesV4.add("S");
         opcionesV4.add("N");
-           opcionesV4.add("s");
+        opcionesV4.add("s");
         opcionesV4.add("n");
         while (!opcionesV4.contains(op)) {
             System.out.print("Escriba una opcion correcta:");
@@ -202,7 +206,7 @@ public class Cliente extends Usuario {
             op = sc1.nextLine();
         }
         if (op.equalsIgnoreCase("S")) {
-            
+
             System.out.println("Ingrese el codigo de la transacción: ");
             System.out.print("Ingrese un numero valido por favor: ");
             String codigoT = sc1.nextLine();

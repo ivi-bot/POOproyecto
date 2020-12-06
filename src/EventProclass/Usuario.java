@@ -30,9 +30,11 @@ public class Usuario {
     }
     public Usuario(String nombre, String apellido){
      this.nombre = nombre;
-
+this.apellido=apellido;
     }
-   
+     public Usuario(String nombre){
+     this.nombre = nombre;
+    }
     public void mostrarInformacion(){
         System.out.println("Bienvenid@ "+this.nombre+" "+this.apellido+"\n");
     }

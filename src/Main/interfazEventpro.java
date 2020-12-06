@@ -161,9 +161,9 @@ public class interfazEventpro {
                         break;
 
                 }
-                System.out.print("Escoga otra opcion si desea continuar\n");
-
                 System.out.println("1. Consultar solicitudes pendientes.\n2. Registrar Evento.\n3. Confirmar Evento.\n4. Consultar Evento\n5. Salir");
+                                System.out.print("Escoga otra opcion si desea continuar\n");
+
                 opcion = sc.nextLine();
                 opcionesV1.add("1");
                 opcionesV1.add("2");

@@ -51,11 +51,11 @@ public class Opcional {
  */
     @Override
     public String toString() {
-        return "precio" + precio +
-                ",cantidad" + cantidad +
-                "valor" + valor +
-                "tipo" + tipo +
-                '}';
+        return  precio +
+                "," + cantidad +
+                "," + valor +
+                "," + tipo 
+                ;
     }
 
     @Override

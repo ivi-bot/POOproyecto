@@ -45,17 +45,31 @@ public class Evento {
         this.fechasolicitudF = fechasolicitudF;
         this.ID = generarCodigo();
         if (tipo.equalsIgnoreCase("boda")) {
-            precioBase=3500.0;
+            precioBase = 3500.0;
         } else if (tipo.equalsIgnoreCase("fiesta empresarial")) {
-                        precioBase=2000.0;
+            precioBase = 2000.0;
 
         } else {
-                        precioBase=300.0;
+            precioBase = 300.0;
 
         }
 
     }
+ public Evento(String tipo, String fechaEventoF) {
+        this.tipo = tipo;
+        this.fechaEventoF = fechaEventoF;
+        this.ID = generarCodigo();
+        if (tipo.equalsIgnoreCase("boda")) {
+            precioBase = 3500.0;
+        } else if (tipo.equalsIgnoreCase("fiesta empresarial")) {
+            precioBase = 2000.0;
 
+        } else {
+            precioBase = 300.0;
+
+        }
+
+    }
     public List<Opcional> getElementosAdicionales() {
         return elementosAdicionales;
     }
